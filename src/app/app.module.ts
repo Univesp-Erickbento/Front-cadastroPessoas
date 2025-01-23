@@ -19,6 +19,7 @@ import { MatList, MatListModule } from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
 
 import {MatCardModule} from '@angular/material/card';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {MatCardModule} from '@angular/material/card';
     AppComponent,
     NavComponent,
     HomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
