@@ -22,6 +22,8 @@ import {MatCardModule} from '@angular/material/card';
 import { HeaderComponent } from './components/header/header.component';
 import { TecnicoComponent } from './components/tecnico/tecnico.component';
 
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { TecnicoComponent } from './components/tecnico/tecnico.component';
     MatSidenavModule,
     MatListModule, 
     MatCardModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
