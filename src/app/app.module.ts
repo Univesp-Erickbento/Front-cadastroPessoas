@@ -20,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 
 import {MatCardModule} from '@angular/material/card';
 import { HeaderComponent } from './components/header/header.component';
+import { TecnicoComponent } from './components/tecnico/tecnico.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HeaderComponent } from './components/header/header.component';
     NavComponent,
     HomeComponent,
     HeaderComponent,
+    TecnicoComponent,
   ],
   imports: [
     BrowserModule,
