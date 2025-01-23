@@ -5,12 +5,28 @@
             <i class="material-icons">home</i>
             Home
         </a>
+        <a mat-list-item routerLink="/">
+          <i class="material-icons">account_circle</i>
+          Técnicos
+      </a>
+      <a mat-list-item routerLink="/">
+        <i class="material-icons">person</i>
+        Clientes
+    </a>
+    <a mat-list-item routerLink="/">
+      <i class="material-icons">code</i>
+      Github
+  </a>
+  <a mat-list-item routerLink="/">
+    <i class="material-icons">logout</i>
+    Logout
+</a>
          </mat-nav-list>
     </mat-drawer>
   
     <div class="sidenav-content">
-      <button type="button" mat-button (click)="drawer.toggle()">
-        Menu
+      <button type="button" mat-mini-fab (click)="drawer.toggle()" class="menu mat-elevation-z8">
+        <mat-icon>menu</mat-icon>
       </button>
     </div>
   
