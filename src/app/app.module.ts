@@ -13,6 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { NavComponent } from './components/nav/nav.component';
 
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+import { MatList, MatListModule } from '@angular/material/list';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +34,8 @@ import { NavComponent } from './components/nav/nav.component';
     MatIconModule,
     MatSelectModule,
     MatInputModule,
+    MatSidenavModule,
+    MatListModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
