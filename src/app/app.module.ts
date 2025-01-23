@@ -16,6 +16,7 @@ import { NavComponent } from './components/nav/nav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { MatList, MatListModule } from '@angular/material/list';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -23,6 +24,7 @@ import { MatList, MatListModule } from '@angular/material/list';
   declarations: [
     AppComponent,
     NavComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
