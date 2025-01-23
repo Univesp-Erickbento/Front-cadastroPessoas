@@ -18,6 +18,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatList, MatListModule } from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
 
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { HomeComponent } from './components/home/home.component';
     MatInputModule,
     MatSidenavModule,
     MatListModule, 
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
