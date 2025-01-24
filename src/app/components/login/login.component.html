@@ -22,11 +22,14 @@
             <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
         </mat-form-field>
 
+        <br>
+
         <mat-form-field>
             <mat-label>Digite sua Senha</mat-label>
             <input
               matInput
               [type]="hide() ? 'password' : 'text'"
+            
             />
             <button
               mat-icon-button
@@ -37,6 +40,12 @@
               <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
           </mat-form-field>
+
+          <br>
+
+  
+    <button mat-flat-button class="submit-button">Cadastrar</button>
+  
           
 
     <div class="forgot-password">
