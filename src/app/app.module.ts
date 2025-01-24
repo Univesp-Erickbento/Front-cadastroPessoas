@@ -25,6 +25,8 @@ import { LoginComponent } from './components/login/login.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatListModule,
     MatCardModule,
     MatTableModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
