@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'perfil', component: PerfilComponent },
       { path: 'cadastro', component: LoginComponent },
       { path: 'entrar', component: EntrarComponent },
+      {path: 'settings', component: SettingsComponent},
     ]
   },
   { path: '**', redirectTo: '' } // Redireciona rotas inválidas para a raiz
