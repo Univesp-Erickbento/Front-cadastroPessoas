@@ -20,9 +20,10 @@ import { HomeComponent } from './components/home/home.component';
 
 import {MatCardModule} from '@angular/material/card';
 import { HeaderComponent } from './components/header/header.component';
-import { TecnicoComponent } from './components/tecnico/tecnico.component';
 
 import {MatTableModule} from '@angular/material/table';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatTableModule} from '@angular/material/table';
     NavComponent,
     HomeComponent,
     HeaderComponent,
-    TecnicoComponent,
+    PerfilComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
