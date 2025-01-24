@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms'; // Adicionado
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -11,20 +12,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+
 import { NavComponent } from './components/nav/nav.component';
-
-import {MatSidenavModule} from '@angular/material/sidenav';
-
-import { MatList, MatListModule } from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
-
-import {MatCardModule} from '@angular/material/card';
 import { HeaderComponent } from './components/header/header.component';
-
-import {MatTableModule} from '@angular/material/table';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/login.component';
-
 
 @NgModule({
   declarations: [
@@ -39,6 +36,7 @@ import { LoginComponent } from './components/login/login.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule, // Adicionado aqui
     MatFormFieldModule,
     MatButtonModule,
     MatDividerModule,
@@ -46,11 +44,11 @@ import { LoginComponent } from './components/login/login.component';
     MatSelectModule,
     MatInputModule,
     MatSidenavModule,
-    MatListModule, 
+    MatListModule,
     MatCardModule,
     MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
