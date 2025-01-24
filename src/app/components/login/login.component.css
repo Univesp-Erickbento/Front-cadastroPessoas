@@ -8,6 +8,7 @@
     margin: 1rem auto;
     border: 1px solid black;
     border-radius: 0.5rem;
+    justify-items: auto;
 }
 
 .form-title {
@@ -24,6 +25,12 @@
 }
 
 .submit-button {
-    margin-left: 15rem;
+    display: flex; /* Habilita o uso de alinhamento flex */
+    align-items: center; /* Alinha o texto verticalmente no centro */
+    justify-content: center; /* Alinha o texto horizontalmente no centro */
+    margin-left: 1rem;
     margin-top: 6.5rem;
+    padding: 1rem 2rem; /* Ajusta o espaçamento interno para ter um botão consistente */
+    text-align: center; /* Apenas uma medida extra para centralização */
 }
+
