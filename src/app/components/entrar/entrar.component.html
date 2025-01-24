@@ -1,17 +1,30 @@
 <h1 class="title mat-elevation-z8">Entrar</h1>
 
-<div class="example-container">
-    <mat-form-field>
-      <mat-label>Enter your email</mat-label>
-      <input
-        matInput
-        placeholder="pat@example.com"
-        [formControl]="email"
-        (blur)="updateErrorMessage()"
-        required
-      />
-      @if (email.invalid) {
-        <mat-error>{{errorMessage()}}</mat-error>
-      }
-    </mat-form-field>
-  </div>
+<div class="email-input-container">
+  <mat-form-field>
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      placeholder="pat@example.com"
+      [formControl]="email"
+      (blur)="updateErrorMessage()"
+      required
+    />
+    <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
+  </mat-form-field>
+</div>
+
+<div class="password-input-container">
+  <mat-form-field>
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide.set(!hide())"
+      [attr.aria-label]="hide() ? 'Hide password' : 'Show password'"
+    >
+      <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  </mat-form-field>
+</div>

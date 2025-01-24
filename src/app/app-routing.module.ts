@@ -9,13 +9,16 @@ import { EntrarComponent } from './components/entrar/entrar.component';
 const routes: Routes = [
   {
     path: '', component: NavComponent, children: [
-      {path: 'home', component: HomeComponent},
-      {path: 'perfil', component: PerfilComponent},
-      {path: 'cadastro', component: LoginComponent},  
-      {path: 'entrar', component: EntrarComponent},
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'cadastro', component: LoginComponent },
+      { path: 'entrar', component: EntrarComponent },
     ]
-  }
+  },
+  { path: '**', redirectTo: '' } // Redireciona rotas inválidas para a raiz
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

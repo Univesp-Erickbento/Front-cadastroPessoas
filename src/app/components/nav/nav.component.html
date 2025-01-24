@@ -1,38 +1,42 @@
 <mat-drawer-container class="container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="side">
-        <mat-nav-list class="nav-list">
-        <a mat-list-item routerLink="home">
-            <i class="material-icons">home</i>
-            Home
-        </a>
-        <a mat-list-item routerLink="profile">
-          <i class="material-icons">account_circle</i>
-          Perfil
+  <!-- Menu lateral -->
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/home">
+        <i class="material-icons">home</i>
+        Home
       </a>
-      <a mat-list-item routerLink="settings">
+      <a mat-list-item routerLink="/perfil">
+        <i class="material-icons">account_circle</i>
+        Perfil
+      </a>
+      <a mat-list-item routerLink="/cadastro">
+       Inscrever-se
+      </a>
+
+      <a mat-list-item routerLink="/cadastro">
         <i class="material-icons">settings</i>
         Configurações
-    </a>
-    <a mat-list-item routerLink="cadastro">
-      <i class="material-icons">login</i>
-      Inscrever-se
-  </a>
+       </a>
+    </mat-nav-list>
+  </mat-drawer>
 
-  <a mat-list-item routerLink="pesquisarpessoas">
-    <i class="material-icons">person</i>
-    Pesquisar Pessoas
-</a>
- 
-         </mat-nav-list>
-    </mat-drawer>
-  
-    <div class="sidenav-content">
-      <app-header></app-header>
-      <button type="button" mat-mini-fab (click)="drawer.toggle()" class="menu mat-elevation-z8">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <router-outlet></router-outlet>
-    </div>
-  
-  </mat-drawer-container>
-  
+  <!-- Conteúdo principal -->
+  <div class="sidenav-content">
+    <app-header></app-header>
+
+    <!-- Botão para abrir/fechar o menu -->
+    <button
+      type="button"
+      mat-mini-fab
+      (click)="drawer.toggle()"
+      class="menu mat-elevation-z8"
+      aria-label="Abrir menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Rotas dinâmicas -->
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
