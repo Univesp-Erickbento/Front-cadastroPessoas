@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/login.component';
+import { EntrarComponent } from './components/entrar/entrar.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LoginComponent } from './components/login/login.component';
     HeaderComponent,
     PerfilComponent,
     LoginComponent,
+    EntrarComponent,
   ],
   imports: [
     BrowserModule,

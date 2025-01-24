@@ -4,6 +4,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { EntrarComponent } from './components/entrar/entrar.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'perfil', component: PerfilComponent},
       {path: 'cadastro', component: LoginComponent},  
+      {path: 'entrar', component: EntrarComponent},
     ]
   }
 ];
