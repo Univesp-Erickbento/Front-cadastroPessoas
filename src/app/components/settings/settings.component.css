@@ -2,6 +2,6 @@
     background-color: rgb(235, 234, 235);
 }
 
-.toggle-slide-um {
-    margin-left: 4rem;
+mat-slide-toggle {
+    margin-left: auto; /* Alinha para a direita automaticamente */
 }
