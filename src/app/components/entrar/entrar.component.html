@@ -1,7 +1,8 @@
-<h1 class="title mat-elevation-z8">Entrar</h1>
+<h1 class="form-title mat-elevation-z8">Entrar</h1>
 
-<div class="email-input-container">
-  <mat-form-field>
+<div class="form-background">
+
+  <mat-form-field appearance="fill">
     <mat-label>Digite seu Email</mat-label>
     <input
       matInput
@@ -12,19 +13,32 @@
     />
     <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
   </mat-form-field>
-</div>
 
-<div class="password-input-container">
-  <mat-form-field>
+  <br>
+
+  <mat-form-field appearance="fill">
     <mat-label>Digite sua Senha</mat-label>
-    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <input matInput [type]="hide ? 'password' : 'text'">
     <button
       mat-icon-button
       matSuffix
-      (click)="hide.set(!hide())"
-      [attr.aria-label]="hide() ? 'Hide password' : 'Show password'"
+      (click)="hide.set(!hide)"
+      [attr.aria-label]="hide ? 'Hide password' : 'Show password'"
     >
-      <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
     </button>
   </mat-form-field>
+
+  <br>
+
+  <button mat-flat-button class="submit-button">Entrar</button>
+
+  <div class="forgot-password">
+    <a routerLink="/esqueci-senha">Esqueci minha senha</a>
+  </div>
+
+  <div class="forgot-password">
+    Não tem uma conta? <a routerLink="/cadastro">Inscrever-se</a>
+  </div>
+  
 </div>

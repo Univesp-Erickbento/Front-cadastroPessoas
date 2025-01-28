@@ -2,13 +2,14 @@
 
 <div class="form-background">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Digite seu Nome</mat-label>
-        <input matInput placeholder="Nome">
-      </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Digite seu Nome</mat-label>
+    <input matInput placeholder="Nome">
+  </mat-form-field>
 
-<div class="container">
-  <mat-form-field>
+  <br>
+
+  <mat-form-field appearance="fill">
     <mat-label>Digite seu Email</mat-label>
     <input
       matInput
@@ -17,38 +18,34 @@
       [formControl]="email"
       (blur)="updateErrorMessage()"
       required
-      class="form-email-input"
     />
-            <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
-        </mat-form-field>
+    <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
+  </mat-form-field>
 
-        <br>
+  <br>
 
-        <mat-form-field>
-            <mat-label>Digite sua Senha</mat-label>
-            <input
-              matInput
-              [type]="hide() ? 'password' : 'text'"
-            
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hide.set(!hide())"
-              [attr.aria-label]="hide() ? 'Mostrar senha' : 'Esconder senha'"
-            >
-              <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
-          </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Digite sua Senha</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide.set(!hide)"
+      [attr.aria-label]="hide ? 'Mostrar senha' : 'Esconder senha'"
+    >
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  </mat-form-field>
 
-          <br>
+  <br>
 
+  <button mat-flat-button class="submit-button">Cadastrar</button>
+
+  <div class="forgot-password">
+    Já tem uma conta? <a routerLink="/entrar">Entrar</a>
+  </div>
   
-    <button mat-flat-button class="submit-button">Cadastrar</button>
-  
-          
-
-    <div class="forgot-password">
-       Já tem uma conta? <a routerLink="/entrar">Entrar</a> 
-    </div>
 </div>

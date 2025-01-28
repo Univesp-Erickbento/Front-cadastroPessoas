@@ -1,36 +1,84 @@
-
-  
+/* Fundo do formulário */
 .form-background {
-    background-color: rgb(99, 97, 99);
-    width: 55%;
-    height: 25rem;
-    justify-content: center;
-    margin: 1rem auto;
-    border: 1px solid black;
+    background-color: #1a1a1a; /* Fundo escuro para contraste */
+    width: 40%;
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 0.7rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Título do formulário */
+.form-title, .title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    padding: 1rem;
+    background: transparent; /* Gradiente cinza-preto */
     border-radius: 0.5rem;
-    justify-items: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 50%;
+    margin: 1.5rem auto;
 }
 
-.form-title {
-    width: 13rem;
-    margin: auto;
-    justify-content: center;
-    display: flex;
-    border-radius: 0.3rem;
-    background-color: (235, 234, 235)
+
+/* Estilo dos campos de entrada */
+mat-form-field {
+    width: 100%;
+    display: block;
 }
 
-.forgot-password {
-    margin-top: 5rem;
+mat-form-field input {
+    color: white;
 }
 
+/* Ícone de visibilidade da senha */
+mat-icon {
+    color: white;
+}
+
+/* Botão de ação */
 .submit-button {
-    display: flex; /* Habilita o uso de alinhamento flex */
-    align-items: center; /* Alinha o texto verticalmente no centro */
-    justify-content: center; /* Alinha o texto horizontalmente no centro */
-    margin-left: 1rem;
-    margin-top: 6.5rem;
-    padding: 1rem 2rem; /* Ajusta o espaçamento interno para ter um botão consistente */
-    text-align: center; /* Apenas uma medida extra para centralização */
+    background-color: #1a73e8;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 0.4rem;
+    transition: 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #145bb7;
+}
+
+/* Links adicionais */
+.forgot-password {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.forgot-password a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+/* Corpo da página */
+body {
+    background-color: #1a73e8; /* Fundo azul */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 

@@ -1,0 +1,16 @@
+::ng-deep .mat-slide-toggle-checked.mat-accent .mat-slide-toggle-bar {
+    background-color: blue !important;
+  }
+  
+  ::ng-deep .mat-slide-toggle-checked.mat-accent .mat-slide-toggle-thumb {
+    background-color: blue !important;
+  }
+  
+  ::ng-deep .mat-slide-toggle.mat-primary .mat-slide-toggle-bar {
+    background-color: blue !important;
+  }
+  
+  ::ng-deep .mat-slide-toggle.mat-primary .mat-slide-toggle-thumb {
+    background-color: blue !important;
+  }
+  
