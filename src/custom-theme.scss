@@ -1,40 +1,19 @@
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
+/* Paletas customizadas */
+$custom-primary: mat.define-palette(mat.$blue-grey-palette);
+$custom-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
+$custom-warn: mat.define-palette(mat.$deep-orange-palette);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$angularproject-primary: mat.define-palette(mat.$indigo-palette);
-$angularproject-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$angularproject-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$angularproject-theme: mat.define-light-theme((
+/* Tema customizado */
+$custom-theme: mat.define-dark-theme((
   color: (
-    primary: $angularproject-primary,
-    accent: $angularproject-accent,
-    warn: $angularproject-warn,
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn,
   )
 ));
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($angularproject-theme);
-
-// Custom styles for slide toggles
-::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
-  background-color: blue !important;
-}
-
-::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-  background-color: lightblue !important;
-}
+/* Inclusão dos temas */
+@include mat.core();
+@include mat.all-component-themes($custom-theme);
