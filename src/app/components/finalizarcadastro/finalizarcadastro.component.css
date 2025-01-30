@@ -1,3 +1,15 @@
+/* Corpo da página */
+body {
+    background-color: #1a73e8; /* Fundo azul */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 /* Fundo do formulário */
 .form-background {
     background-color: #1a1a1a; /* Fundo escuro para contraste */
@@ -9,7 +21,7 @@
 }
 
 /* Título do formulário */
-.form-title, .title {
+.form-title {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
@@ -20,7 +32,6 @@
     width: 50%;
     margin: 1.5rem auto;
 }
-
 
 /* Estilo dos campos de entrada */
 mat-form-field {
@@ -68,16 +79,3 @@ mat-icon {
 .forgot-password a:hover {
     text-decoration: underline;
 }
-
-/* Corpo da página */
-body {
-    background-color: #1a73e8; /* Fundo azul */
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-

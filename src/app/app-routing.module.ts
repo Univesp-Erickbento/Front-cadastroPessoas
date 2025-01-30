@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { FinalizarcadastroComponent } from './components/finalizarcadastro/finalizarcadastro.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'cadastro', component: LoginComponent },
       { path: 'entrar', component: EntrarComponent },
       {path: 'settings', component: SettingsComponent},
+      {path: 'finalizarcadastro', component: FinalizarcadastroComponent},
     ]
   },
   { path: '**', redirectTo: '' } // Redireciona rotas inválidas para a raiz

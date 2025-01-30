@@ -1,0 +1,89 @@
+<h1 class="form-title mat-elevation-z2">Finalizar Cadastro</h1>
+
+<form [formGroup]="cadastroForm" class="form-background">
+
+  <!-- Nome -->
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput placeholder="Nome" formControlName="nome">
+  </mat-form-field>
+
+  <br>
+
+  <!-- Sobrenome -->
+  <mat-form-field appearance="fill">
+    <mat-label>Sobrenome</mat-label>
+    <input matInput placeholder="Sobrenome" formControlName="sobrenome">
+  </mat-form-field>
+
+  <br>
+
+  <!-- CPF -->
+  <mat-form-field appearance="fill">
+    <mat-label>CPF</mat-label>
+    <input matInput placeholder="CPF" type="text" formControlName="cpf">
+  </mat-form-field>
+
+  <br>
+
+  <!-- RG -->
+  <mat-form-field appearance="fill">
+    <mat-label>RG</mat-label>
+    <input matInput placeholder="RG" type="text" formControlName="rg">
+  </mat-form-field>
+
+  <br>
+
+  <!-- Gênero -->
+  <mat-form-field appearance="fill">
+    <mat-label>Gênero</mat-label>
+    <mat-select formControlName="genero">
+      <mat-option value="masculino">Masculino</mat-option>
+      <mat-option value="feminino">Feminino</mat-option>
+      <mat-option value="outro">Outro</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <!-- Email -->
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="pat@example.com"
+      type="email"
+      formControlName="email"
+      required
+    />
+    <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <br>
+
+  <!-- Telefone -->
+  <mat-form-field appearance="fill">
+    <mat-label>Telefone</mat-label>
+    <input matInput placeholder="Telefone" type="tel" formControlName="telefone">
+  </mat-form-field>
+
+  <br>
+
+  <!-- Data de Nascimento -->
+  <mat-form-field appearance="fill">
+    <mat-label>Data de Nascimento</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="Data de Nascimento" formControlName="dataNascimento">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <br>
+
+  <!-- Botão de Finalizar Cadastro -->
+  <button mat-flat-button class="submit-button" (click)="onSubmit()">Finalizar Cadastro</button>
+
+  <div class="forgot-password">
+    Já tem uma conta? <a routerLink="/entrar">Entrar</a>
+  </div>
+  
+</form>

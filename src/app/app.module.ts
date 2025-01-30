@@ -27,6 +27,11 @@ import { SettingsComponent } from './components/settings/settings.component';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
+import {MatRadioModule} from '@angular/material/radio';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { FinalizarcadastroComponent } from './components/finalizarcadastro/finalizarcadastro.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +42,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     LoginComponent,
     EntrarComponent,
     SettingsComponent,
+    FinalizarcadastroComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +60,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatCardModule,
     MatTableModule,
     MatSlideToggleModule,
+    MatRadioModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
