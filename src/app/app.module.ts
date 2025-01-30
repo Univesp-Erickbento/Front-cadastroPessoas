@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms'; // Adicionado
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
@@ -24,13 +27,6 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/login.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
 import { SettingsComponent } from './components/settings/settings.component';
-
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-import {MatRadioModule} from '@angular/material/radio';
-
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { FinalizarcadastroComponent } from './components/finalizarcadastro/finalizarcadastro.component';
 
 @NgModule({
   declarations: [
@@ -42,13 +38,12 @@ import { FinalizarcadastroComponent } from './components/finalizarcadastro/final
     LoginComponent,
     EntrarComponent,
     SettingsComponent,
-    FinalizarcadastroComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule, // Adicionado aqui
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
     MatDividerModule,
