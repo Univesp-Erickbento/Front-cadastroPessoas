@@ -11,15 +11,19 @@
         Perfil
       </a>
       <a mat-list-item routerLink="/cadastro">
-        <i class="material-icons">login</i>
-       Cadastrar-se
+        <i class="material-icons">person_add</i>
+        Cadastrar-se
       </a>
-
       <a mat-list-item routerLink="/settings">
         <i class="material-icons">settings</i>
         Configurações
-       </a>
+      </a>
     </mat-nav-list>
+
+    <button mat-button (click)="toggleTheme()" class="theme-toggle">
+      <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+      Mudar Tema
+    </button>
   </mat-drawer>
 
   <!-- Conteúdo principal -->

@@ -27,6 +27,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/login.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     LoginComponent,
     EntrarComponent,
     SettingsComponent,
+    CadastrarPessoaComponent,
   ],
   imports: [
     BrowserModule,
