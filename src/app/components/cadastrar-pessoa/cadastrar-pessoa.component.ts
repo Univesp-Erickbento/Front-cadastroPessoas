@@ -16,16 +16,28 @@ export class CadastrarPessoaComponent {
       cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: ['', [Validators.required, Validators.pattern(/^\d{2}\.\d{3}\.\d{3}-\d{1}$/)]],
       genero: ['', Validators.required],
-      nascimento: ['', Validators.required]
-    });
+      nascimento: ['', Validators.required],
+
+      // Checkboxes
+      funcionario: [false],
+      cliente: [false]
+    }, { validators: this.cargoValidator });
+  }
+
+  // Validação personalizada para exigir pelo menos um cargo selecionado
+  cargoValidator(form: FormGroup) {
+    const funcionario = form.get('funcionario')?.value;
+    const cliente = form.get('cliente')?.value;
+
+    return funcionario || cliente ? null : { noCargo: true };
   }
 
   cadastrar() {
     if (this.pessoaForm.valid) {
       console.log('Cadastro realizado:', this.pessoaForm.value);
-      // Aqui você pode adicionar a lógica para enviar os dados para o backend
+      alert('Cadastro realizado com sucesso!');
     } else {
-      console.log('Formulário inválido');
+      alert('Por favor, preencha todos os campos corretamente.');
     }
   }
 }

@@ -19,27 +19,30 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/login.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    HeaderComponent,
     PerfilComponent,
     LoginComponent,
     EntrarComponent,
     SettingsComponent,
     CadastrarPessoaComponent,
+    ClientesComponent,
+    FuncionariosComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastra
     MatSlideToggleModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
