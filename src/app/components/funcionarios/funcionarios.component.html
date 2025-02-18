@@ -1,1 +1,38 @@
-<p>funcionarios works!</p>
+<div class="form-container">
+  <h2 class="title">Cadastro de Funcionário</h2>
+  <form [formGroup]="funcionarioForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+          <mat-label>ID do Funcionário</mat-label>
+          <input matInput formControlName="id" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Tipo do Funcionário</mat-label>
+          <mat-select formControlName="tipo">
+              <mat-option value="admin">Admin</mat-option>
+              <mat-option value="gerente">Gerente</mat-option>
+              <mat-option value="operacional">Operacional</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>RG do Funcionário</mat-label>
+          <input matInput formControlName="funcionarioRg" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Status do Funcionário</mat-label>
+          <mat-select formControlName="funcionarioStatus">
+              <mat-option value="ativo">Ativo</mat-option>
+              <mat-option value="inativo">Inativo</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Data de Admissão</mat-label>
+          <input matInput formControlName="dataDeAdmissao" type="date" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="submit-btn" type="submit">Cadastrar</button>
+  </form>
+</div>

@@ -1,40 +1,31 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, Validators } from '@angular/forms';
-import { merge } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-/** @title Form field with error messages */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+export class LoginComponent implements OnInit {
+  entrarForm: FormGroup;
 
-  errorMessage = signal('');
+  constructor(private fb: FormBuilder) {}
 
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
+  ngOnInit() {
+    this.entrarForm = this.fb.group({
+      username: ['', Validators.required],
+      senha: ['', Validators.required]
+    });
   }
 
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
-    } else if (this.email.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
+  fazerLogin() {
+    if (this.entrarForm.valid) {
+      const username = this.entrarForm.get('username').value;
+      const senha = this.entrarForm.get('senha').value;
+      console.log(`Username: ${username}, Senha: ${senha}`);
+      // Implemente a lógica de autenticação aqui
     } else {
-      this.errorMessage.set('');
+      console.log('Formulário inválido');
     }
   }
-
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
-
 }

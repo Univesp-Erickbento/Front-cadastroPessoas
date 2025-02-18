@@ -1,1 +1,24 @@
-<p>clientes works!</p>
+<div class="form-container">
+    <h2 class="title">Cadastro de Cliente</h2>
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>ID do Cliente</mat-label>
+            <input matInput formControlName="id" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>RG do Cliente</mat-label>
+            <input matInput formControlName="rg" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Status do Cliente</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="ativo">Ativo</mat-option>
+                <mat-option value="inativo">Inativo</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="submit-btn" type="submit">Cadastrar</button>
+    </form>
+</div>

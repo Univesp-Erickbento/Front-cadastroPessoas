@@ -19,7 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,8 +28,10 @@ import { LoginComponent } from './components/login/login.component';
 import { EntrarComponent } from './components/entrar/entrar.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
-import { ClientesComponent } from './components/clientes/clientes.component';
-import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
+import { ClienteComponent } from './components/clientes/clientes.component';
+import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
+
+import { HttpClientModule } from '@angular/common/http'; // Certifique-se de importar corretamente
 
 @NgModule({
   declarations: [
@@ -41,8 +43,8 @@ import { FuncionariosComponent } from './components/funcionarios/funcionarios.co
     EntrarComponent,
     SettingsComponent,
     CadastrarPessoaComponent,
-    ClientesComponent,
-    FuncionariosComponent,
+    ClienteComponent,
+    FuncionarioComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ import { FuncionariosComponent } from './components/funcionarios/funcionarios.co
     MatRadioModule,
     MatDatepickerModule,
     MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

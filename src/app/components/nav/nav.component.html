@@ -28,13 +28,11 @@
 
   <!-- Conteúdo principal -->
   <div class="sidenav-content">
-    <app-header></app-header>
-
     <!-- Botão para abrir/fechar o menu -->
     <button
       type="button"
       mat-mini-fab
-      (click)="drawer.toggle()"
+      (click)="toggleDrawer()"
       class="menu mat-elevation-z8"
       aria-label="Abrir menu"
     >

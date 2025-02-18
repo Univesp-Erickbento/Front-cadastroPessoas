@@ -1,44 +1,22 @@
-<h1 class="form-title mat-elevation-z8">Entrar</h1>
+<div class="login-form">
+  <mat-card>
+    <mat-card-title>Entrar</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="entrarForm" (ngSubmit)="entrar()">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome de Usuário</mat-label>
+          <input matInput formControlName="nomeUsuario" required>
+          <mat-error *ngIf="entrarForm.controls['nomeUsuario'].invalid && entrarForm.controls['nomeUsuario'].touched">Nome de usuário é obrigatório</mat-error>
+        </mat-form-field>
 
-<div class="form-background">
+        <mat-form-field appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="senha" type="password" required>
+          <mat-error *ngIf="entrarForm.controls['senha'].invalid && entrarForm.controls['senha'].touched">Senha é obrigatória</mat-error>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Digite seu Email</mat-label>
-    <input
-      matInput
-      placeholder="pat@example.com"
-      [formControl]="email"
-      (blur)="updateErrorMessage()"
-      required
-    />
-    <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
-  </mat-form-field>
-
-  <br>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Digite sua Senha</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'">
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hide.set(!hide)"
-      [attr.aria-label]="hide ? 'Hide password' : 'Show password'"
-    >
-      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
-  </mat-form-field>
-
-  <br>
-
-  <button mat-flat-button class="submit-button">Entrar</button>
-
-  <div class="forgot-password">
-    <a routerLink="/esqueci-senha">Esqueci minha senha</a>
-  </div>
-
-  <div class="forgot-password">
-    Não tem uma conta? <a routerLink="/cadastro">Novo Login</a>
-  </div>
-  
+        <button mat-raised-button color="primary" type="submit">Entrar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

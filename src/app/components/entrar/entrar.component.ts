@@ -1,40 +1,47 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, Validators } from '@angular/forms';
-import { merge } from 'rxjs';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
-/** @title Form field with error messages */
 @Component({
   selector: 'app-entrar',
   templateUrl: './entrar.component.html',
-  styleUrls: ['./entrar.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./entrar.component.css']
 })
 export class EntrarComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+  entrarForm!: FormGroup;
 
-  errorMessage = signal('');
-
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.entrarForm = this.fb.group({
+      nomeUsuario: ['', Validators.required],
+      senha: ['', Validators.required]
+    });
   }
 
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
-    } else if (this.email.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
+  entrar() {
+    if (this.entrarForm.valid) {
+      console.log('Dados para login:', this.entrarForm.value);
+      console.log('Enviando requisição para URL:', this.authService['loginUrl']);
+  
+      this.authService.login(this.entrarForm.value).subscribe({
+        next: (response) => {
+          console.log('Login realizado:', response);
+          if (response.accessToken) {
+            this.authService.salvarToken(response.accessToken);
+            this.router.navigate(['/dashboard']); // Redireciona após login
+          } else {
+            console.error('Erro ao receber o token');
+            alert('Falha ao entrar! Verifique suas credenciais.');
+          }
+        },
+        error: (err) => {
+          console.error('Erro ao entrar:', err);
+          alert('Falha ao entrar! Verifique suas credenciais.');
+        }
+      });
     } else {
-      this.errorMessage.set('');
+      console.log('Formulário inválido');
     }
   }
 
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
-
-}
+}  

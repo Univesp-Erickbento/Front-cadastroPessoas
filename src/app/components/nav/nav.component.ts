@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-nav',
@@ -6,7 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
+  @ViewChild('drawer') drawer: MatDrawer;
   isDarkMode = false;
+
+  toggleDrawer() {
+    this.drawer.toggle();
+  }
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;

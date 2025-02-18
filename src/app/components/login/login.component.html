@@ -1,52 +1,15 @@
-<h1 class="form-title mat-elevation-z2">Cadastro</h1>
-
-<div class="form-background">
-
+<form [formGroup]="entrarForm">
   <mat-form-field appearance="fill">
-    <mat-label>Digite seu Nome</mat-label>
-    <input matInput placeholder="Nome">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" required>
+    <mat-error *ngIf="entrarForm.get('username')?.invalid">Nome de usuário inválido</mat-error>
   </mat-form-field>
 
-  <br>
-
   <mat-form-field appearance="fill">
-    <mat-label>Digite seu Email</mat-label>
-    <input
-      matInput
-      placeholder="pat@example.com"
-      type="email"
-      [formControl]="email"
-      (blur)="updateErrorMessage()"
-      required
-    />
-    <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
+    <mat-label>Senha</mat-label>
+    <input matInput formControlName="senha" type="password" required>
+    <mat-error *ngIf="entrarForm.get('senha')?.invalid">Senha obrigatória</mat-error>
   </mat-form-field>
 
-  <br>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Digite sua Senha</mat-label>
-    <input
-      matInput
-      [type]="hide ? 'password' : 'text'"
-      required
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hide.set(!hide)"
-      [attr.aria-label]="hide ? 'Mostrar senha' : 'Esconder senha'"
-    >
-      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
-  </mat-form-field>
-
-  <br>
-
-  <button mat-flat-button class="submit-button">Cadastrar</button>
-
-  <div class="forgot-password">
-    Já tem uma conta? <a routerLink="/entrar">Entrar</a>
-  </div>
-  
-</div>
+  <button mat-flat-button color="primary" class="submit-button" [disabled]="entrarForm.invalid" (click)="fazerLogin()">Entrar</button>
+</form>
