@@ -1,0 +1,15 @@
+<form [formGroup]="registrarForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Nome de Usuário</mat-label>
+    <input matInput formControlName="nomeUsuario" required>
+    <mat-error *ngIf="registrarForm.get('nomeUsuario')?.invalid">Nome de usuário inválido</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Senha</mat-label>
+    <input matInput formControlName="senha" type="password" required>
+    <mat-error *ngIf="registrarForm.get('senha')?.invalid">Senha obrigatória</mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" class="submit-button" [disabled]="registrarForm.invalid" (click)="registrar()">Cadastrar</button>
+</form>

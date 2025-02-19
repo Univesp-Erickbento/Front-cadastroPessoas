@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-entrar',
-  templateUrl: './entrar.component.html',
-  styleUrls: ['./entrar.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class EntrarComponent {
+export class LoginComponent {
   entrarForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
@@ -43,5 +43,4 @@ export class EntrarComponent {
       console.log('Formulário inválido');
     }
   }
-
-}  
+}

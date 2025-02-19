@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,14 +25,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { LoginComponent } from './components/login/login.component';
-import { EntrarComponent } from './components/entrar/entrar.component';
+import { RegistrarComponent } from './components/login/registrar/registrar.component'; // Corrigido o nome da classe para RegistrarComponent
+import { LoginComponent } from './components/login/entrar/login.component'; // Corrigido o nome da classe para EntrarComponent
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { ClienteComponent } from './components/clientes/clientes.component';
 import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
-
-import { HttpClientModule } from '@angular/common/http'; // Certifique-se de importar corretamente
 
 @NgModule({
   declarations: [
@@ -39,8 +38,8 @@ import { HttpClientModule } from '@angular/common/http'; // Certifique-se de imp
     NavComponent,
     HomeComponent,
     PerfilComponent,
+    RegistrarComponent,
     LoginComponent,
-    EntrarComponent,
     SettingsComponent,
     CadastrarPessoaComponent,
     ClienteComponent,
