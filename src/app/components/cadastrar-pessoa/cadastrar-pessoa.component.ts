@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';  // Importar o Router
+import { PessoaService } from './PessoaService';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -9,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CadastrarPessoaComponent {
   pessoaForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private router: Router) {
     this.pessoaForm = this.fb.group({
       nome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
       sobrenome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
@@ -34,8 +36,28 @@ export class CadastrarPessoaComponent {
 
   cadastrar() {
     if (this.pessoaForm.valid) {
-      console.log('Cadastro realizado:', this.pessoaForm.value);
-      alert('Cadastro realizado com sucesso!');
+      // Clonar os dados do formulário e remover os campos de checkbox
+      const pessoaDados = { ...this.pessoaForm.value };
+      delete pessoaDados.funcionario;
+      delete pessoaDados.cliente;
+
+      this.pessoaService.cadastrarPessoa(pessoaDados).subscribe(
+        response => {
+          console.log('Cadastro realizado:', response);
+          alert('Cadastro realizado com sucesso!');
+
+          // Redirecionar conforme o checkbox selecionado
+          if (this.pessoaForm.get('funcionario')?.value) {
+            this.router.navigate(['/funcionario']);
+          } else if (this.pessoaForm.get('cliente')?.value) {
+            this.router.navigate(['/cliente']);
+          }
+        },
+        error => {
+          console.error('Erro ao realizar cadastro:', error);
+          alert('Ocorreu um erro ao realizar o cadastro. Por favor, tente novamente.');
+        }
+      );
     } else {
       alert('Por favor, preencha todos os campos corretamente.');
     }

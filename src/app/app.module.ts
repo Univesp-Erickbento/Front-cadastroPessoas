@@ -25,12 +25,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { RegistrarComponent } from './components/login/registrar/registrar.component'; // Corrigido o nome da classe para RegistrarComponent
-import { LoginComponent } from './components/login/entrar/login.component'; // Corrigido o nome da classe para EntrarComponent
+import { RegistrarComponent } from './components/login/registrar/registrar.component';
+import { LoginComponent } from './components/login/entrar/login.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { ClienteComponent } from './components/clientes/clientes.component';
 import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
+
+import { PessoaService } from './components/cadastrar-pessoa/PessoaService';  // Certifique-se de que o caminho esteja correto
 
 @NgModule({
   declarations: [
@@ -66,7 +68,7 @@ import { FuncionarioComponent } from './components/funcionarios/funcionarios.com
     MatCheckboxModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [PessoaService],  // Removido os colchetes adicionais
   bootstrap: [AppComponent]
 })
 export class AppModule {}
