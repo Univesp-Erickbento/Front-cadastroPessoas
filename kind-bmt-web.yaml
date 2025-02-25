@@ -1,35 +1,17 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: bmt-web
-  labels:
-    app: bmt-web
-spec:
-  replicas: 3  # Número de réplicas para alta disponibilidade
-  selector:
-    matchLabels:
-      app: bmt-web
-  template:
-    metadata:
-      labels:
-        app: bmt-web
-    spec:
-      containers:
-        - name: bmt-web
-          image: bmt-web:latest  # Usando a tag 'latest' para pegar a versão mais recente
-          ports:
-            - containerPort: 80  # Porta interna do container (porta exposta no container)
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: bmt-web-service
-spec:
-  selector:
-    app: bmt-web
-  ports:
-    - protocol: TCP
-      port: 80            # Porta exposta no Kubernetes
-      targetPort: 80      # Porta interna do container
-  type: LoadBalancer  # Tipo de serviço para expor o frontend (pode ser LoadBalancer ou NodePort)
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+# One control plane node and three "workers".
+#
+# While these will not add more real compute capacity and
+# have limited isolation, this can be useful for testing
+# rolling updates etc.
+#
+# The API-server and other control plane components will be
+# on the control-plane node.
+#
+# You probably don't need this unless you are testing Kubernetes itself.
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+- role: worker
