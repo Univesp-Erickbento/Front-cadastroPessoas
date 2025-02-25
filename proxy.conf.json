@@ -4,7 +4,7 @@
     "secure": false
   },
   "/api": {
-    "target": "http://localhost:4200",
+    "target": "http://192.168.15.200:4200",
     "secure": false,
     "changeOrigin": true
   }
