@@ -27,4 +27,12 @@ docker rmi $SERVICE_NAME:$VERSION
 echo "Construindo a nova imagem $SERVICE_NAME:$VERSION..."
 docker build -t $SERVICE_NAME:$VERSION .
 
+# Passo 7: Rodar o novo container com a nova imagem
+echo "Criando e iniciando o container $SERVICE_NAME..."
+docker run -d --name $SERVICE_NAME -p 4200:80 --network $DOCKER_NETWORK $SERVICE_NAME:$VERSION
+
+# Passo 8: Verificar se o container está rodando
+echo "Verificando se o container está rodando..."
+docker ps | grep $SERVICE_NAME
+
 echo "Deploy concluído com sucesso!"

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bmt-web
+  labels:
+    app: bmt-web
+spec:
+  replicas: 1  # Número de réplicas para alta disponibilidade
+  selector:
+    matchLabels:
+      app: bmt-web
+  template:
+    metadata:
+      labels:
+        app: bmt-web
+    spec:
+      containers:
+        - name: bmt-web
+          image: bmt-web:latest  # Usando a tag 'latest' para pegar a versão mais recente
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4200  # Porta interna do container (porta exposta no container)
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bmt-web-service
+spec:
+  selector:
+    app: bmt-web
+  ports:
+    - protocol: TCP
+      port: 4200            # Porta exposta no Kubernetes
+      targetPort: 4200      # Porta interna do container
+      nodePort: 34200     # Porta externa para acessar via NodePort
+  type: NodePort  # Mudado para NodePort para funcionar no kind (em vez de LoadBalancer)
+#  externalIPs:
+#    - 192.168.15.5  # IP externo que você deseja associar ao serviço

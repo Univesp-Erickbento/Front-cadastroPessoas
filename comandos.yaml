@@ -1,0 +1,8 @@
+ng build --prod
+npm install
+./deploy.sh
+kind create cluster --config kind-bmt-web.yaml
+kind load docker-image bmt-web:0.0.2 --name bmt-web
+kubectl apply -f deployment-bmt-web.yaml
+kubectl rollout restart deployment bmt-web
+kubectl config get-contexts
