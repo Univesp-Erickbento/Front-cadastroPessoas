@@ -9,6 +9,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { ClienteComponent } from './components/clientes/clientes.component';
 import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
+import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent},
       { path: 'clientes', component: ClienteComponent},
       { path: 'funcionarios', component: FuncionarioComponent},
+      { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
     ]
   },
   { path: '**', redirectTo: '' } // Redireciona rotas inválidas para a raiz
