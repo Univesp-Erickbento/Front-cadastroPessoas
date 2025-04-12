@@ -1,5 +1,32 @@
-.simple-card-home {
+.header {
+    background-color: #333;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  .button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto;
     width: 90%;
-    margin: 1rem auto;
-    background-color: rgb(235,235,235);
-}
+  }
+  
+  .action-button {
+    background-color: #ccc;
+    border: none;
+    padding: 1.2rem 2rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    min-width: 250px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action-button:hover {
+    background-color: #bbb;
+  }
+  

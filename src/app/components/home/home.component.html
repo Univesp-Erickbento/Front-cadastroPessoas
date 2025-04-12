@@ -1,2 +1,40 @@
-<h1>home</h1>
-  
+<div class="header">
+  <h1>Studio Bento</h1>
+</div>
+
+<div class="button-grid">
+  <!-- ✅ Redireciona para /cadastrar-pessoa com destino=funcionario -->
+  <button class="action-button" 
+          [routerLink]="['/cadastrar-pessoa']" 
+          [queryParams]="{ destino: 'funcionario' }">
+    Cadastrar Funcionário
+  </button>
+
+  <!-- ✅ Redireciona para /cadastrar-pessoa com destino=cliente -->
+  <button class="action-button" 
+          [routerLink]="['/cadastrar-pessoa']" 
+          [queryParams]="{ destino: 'cliente' }">
+    Cadastrar Cliente
+  </button>
+
+  <!-- Outros botões permanecem os mesmos -->
+  <button class="action-button" [routerLink]="'/settings'">
+    Cadastrar Estabelecimento
+  </button>
+
+  <button class="action-button" [routerLink]="'/funcionarios'">
+    Pesquisar Funcionário
+  </button>
+
+  <button class="action-button" [routerLink]="'/settings'">
+    Pesquisar Estabelecimento
+  </button>
+
+  <button class="action-button" [routerLink]="'/settings'">
+    Fazer Agendamento
+  </button>
+
+  <button class="action-button" [routerLink]="'/settings'">
+    Cadastrar Tipo de Serviço
+  </button>
+</div>

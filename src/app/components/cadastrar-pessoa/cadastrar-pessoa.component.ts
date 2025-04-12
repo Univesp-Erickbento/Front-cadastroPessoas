@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';  // Importar o Router
+import { Router, ActivatedRoute } from '@angular/router';
 import { PessoaService } from './PessoaService';
 
 @Component({
@@ -10,47 +10,45 @@ import { PessoaService } from './PessoaService';
 })
 export class CadastrarPessoaComponent {
   pessoaForm: FormGroup;
+  destino: string | null = null;
 
-  constructor(private fb: FormBuilder, private pessoaService: PessoaService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private pessoaService: PessoaService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    // Captura o parâmetro "destino" da URL
+    this.route.queryParams.subscribe(params => {
+      this.destino = params['destino'];
+    });
+
     this.pessoaForm = this.fb.group({
       nome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
       sobrenome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: ['', [Validators.required, Validators.pattern(/^\d{2}\.\d{3}\.\d{3}-\d{1}$/)]],
       genero: ['', Validators.required],
-      nascimento: ['', Validators.required],
-
-      // Checkboxes
-      funcionario: [false],
-      cliente: [false]
-    }, { validators: this.cargoValidator });
+      nascimento: ['', Validators.required]
+    });
   }
 
-  // Validação personalizada para exigir pelo menos um cargo selecionado
-  cargoValidator(form: FormGroup) {
-    const funcionario = form.get('funcionario')?.value;
-    const cliente = form.get('cliente')?.value;
-
-    return funcionario || cliente ? null : { noCargo: true };
-  }
-
-  cadastrar() {
+  proximo() {
     if (this.pessoaForm.valid) {
-      // Clonar os dados do formulário e remover os campos de checkbox
-      const pessoaDados = { ...this.pessoaForm.value };
-      delete pessoaDados.funcionario;
-      delete pessoaDados.cliente;
+      const pessoaDados = this.pessoaForm.value;
 
       this.pessoaService.cadastrarPessoa(pessoaDados).subscribe(
         response => {
           console.log('Cadastro realizado:', response);
           alert('Cadastro realizado com sucesso!');
 
-          // Redirecionar conforme o checkbox selecionado
-          if (this.pessoaForm.get('funcionario')?.value) {
+          // Redireciona para a página conforme o parâmetro "destino"
+          if (this.destino === 'funcionario') {
             this.router.navigate(['/funcionario']);
-          } else if (this.pessoaForm.get('cliente')?.value) {
+          } else if (this.destino === 'cliente') {
             this.router.navigate(['/cliente']);
+          } else {
+            this.router.navigate(['/']); // fallback padrão
           }
         },
         error => {

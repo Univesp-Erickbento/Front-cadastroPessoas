@@ -42,23 +42,14 @@
           <mat-error *ngIf="pessoaForm.get('nascimento')?.invalid">Data inválida</mat-error>
         </mat-form-field>
 
-        <!-- Checkboxes de Cargo -->
-        <div class="checkbox-group">
-          <label>Tipo de Pessoa</label>
-          <mat-checkbox formControlName="funcionario">Funcionário</mat-checkbox>
-          <mat-checkbox formControlName="cliente">Cliente</mat-checkbox>
-          <mat-error *ngIf="pessoaForm.get('cargo')?.hasError('required')">
-            Selecione pelo menos um Tipo de Pessoa
-          </mat-error>
-        </div>
-
+        <!-- Botão de Próximo -->
         <button 
           mat-flat-button 
           color="primary" 
           class="submit-btn"
           [disabled]="pessoaForm.invalid" 
-          (click)="cadastrar()">
-          Cadastrar
+          (click)="proximo()">
+          Próximo
         </button>
       </form>
     </mat-card-content>
