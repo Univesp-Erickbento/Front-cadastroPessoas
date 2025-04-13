@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'registrar', component: RegistrarComponent },
       { path: 'login', component: LoginComponent },
       { path: 'settings', component: SettingsComponent },
-      { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent},
+      { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent}, // Cadastrar Pessoa
       { path: 'clientes', component: ClienteComponent},
       { path: 'funcionarios', component: FuncionarioComponent},
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },

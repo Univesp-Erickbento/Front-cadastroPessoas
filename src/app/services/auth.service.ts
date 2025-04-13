@@ -1,49 +1,64 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://192.168.15.200:9090/auth/login'; // URL do seu backend
-  private registerUrl = 'http://192.168.15.200:9090/auth/register'; // URL de registro
+  private loginUrl = 'http://192.168.15.200:9090/auth/login';
+  private registerUrl = 'http://192.168.15.200:9090/auth/register';
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: any): Observable<any> {
+  // Login com nomeUsuario e senha
+  login(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
+    // Remover o token expirado ou qualquer token armazenado no localStorage antes do login
+    localStorage.removeItem('authToken');
+
     const loginRequest = {
-      nomeUsuario: credentials.nomeUsuario, // Nome ajustado para corresponder ao backend
+      nomeUsuario: credentials.nomeUsuario,
       senha: credentials.senha
     };
+
     return this.http.post<any>(this.loginUrl, loginRequest, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
 
-  register(credentials: any): Observable<any> {
+  // Registro de novo usuário
+  register(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
     const registerRequest = {
-      nomeUsuario: credentials.nomeUsuario, // Nome ajustado para corresponder ao backend
+      nomeUsuario: credentials.nomeUsuario,
       senha: credentials.senha
     };
+
     return this.http.post<any>(this.registerUrl, registerRequest, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
-  
-  salvarToken(token: string) {
+
+  // Salvar token JWT
+  salvarToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  getToken() {
+  // Recuperar o token JWT
+  getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  logout() {
+  // Realizar logout e remover o token
+  logout(): void {
     localStorage.removeItem('authToken');
+  }
+
+  // Redirecionamento após login
+  setRedirectUrl(url: string): void {
+    localStorage.setItem('redirectUrl', url);
+  }
+
+  getRedirectUrl(): string | null {
+    return localStorage.getItem('redirectUrl');
   }
 }

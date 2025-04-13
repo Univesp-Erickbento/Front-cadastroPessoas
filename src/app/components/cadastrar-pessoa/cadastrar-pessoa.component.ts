@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PessoaService } from './PessoaService';
+import { PessoaService } from './PessoaService';  // Certifique-se de importar o serviço corretamente
+import { AuthService } from '../../services/auth.service';  // Importando o AuthService para verificar o token
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -16,13 +17,15 @@ export class CadastrarPessoaComponent {
     private fb: FormBuilder,
     private pessoaService: PessoaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService // Adicionando o AuthService para verificar o token
   ) {
     // Captura o parâmetro "destino" da URL
     this.route.queryParams.subscribe(params => {
       this.destino = params['destino'];
     });
 
+    // Criação do formulário com validações
     this.pessoaForm = this.fb.group({
       nome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
       sobrenome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
@@ -33,22 +36,33 @@ export class CadastrarPessoaComponent {
     });
   }
 
+  // Método 'Proximo' que será chamado ao clicar no botão
   proximo() {
     if (this.pessoaForm.valid) {
       const pessoaDados = this.pessoaForm.value;
 
+      // Verificando se o token está presente
+      const token = this.authService.getToken();
+      if (!token) {
+        alert('Você precisa estar logado para realizar o cadastro!');
+        this.router.navigate(['/login']); // Redireciona para o login caso o token não exista
+        return;
+      }
+
+      // Passando o token como cabeçalho na requisição
       this.pessoaService.cadastrarPessoa(pessoaDados).subscribe(
+
         response => {
           console.log('Cadastro realizado:', response);
           alert('Cadastro realizado com sucesso!');
 
           // Redireciona para a página conforme o parâmetro "destino"
           if (this.destino === 'funcionario') {
-            this.router.navigate(['/funcionario']);
+            this.router.navigate(['/funcionarios']);  // Corrigido: `/funcionarios` (plural)
           } else if (this.destino === 'cliente') {
-            this.router.navigate(['/cliente']);
+            this.router.navigate(['/clientes']);  // Corrigido: `/clientes` (plural)
           } else {
-            this.router.navigate(['/']); // fallback padrão
+            this.router.navigate(['/']); // Fallback para a página inicial
           }
         },
         error => {
