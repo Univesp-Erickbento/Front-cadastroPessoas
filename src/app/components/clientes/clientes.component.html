@@ -1,24 +1,61 @@
 <div class="form-container">
     <h2 class="title">Cadastro de Cliente</h2>
+  
     <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-            <mat-label>ID do Cliente</mat-label>
-            <input matInput formControlName="id" readonly>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>RG do Cliente</mat-label>
-            <input matInput formControlName="rg" required>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Status do Cliente</mat-label>
-            <mat-select formControlName="status">
-                <mat-option value="ativo">Ativo</mat-option>
-                <mat-option value="inativo">Inativo</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" class="submit-btn" type="submit">Cadastrar</button>
+  
+      <!-- ID do Cliente (gerado automaticamente) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID do Cliente</mat-label>
+        <input matInput formControlName="id" readonly>
+      </mat-form-field>
+  
+      <!-- Nome (aparece se já estiver vindo da rota ou preenchido pela pesquisa) -->
+      <mat-form-field appearance="outline" class="full-width" *ngIf="clienteForm.get('nome')?.value">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" readonly>
+      </mat-form-field>
+  
+      <!-- CPF com máscara automática -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>CPF</mat-label>
+        <input 
+          matInput 
+          formControlName="cpf" 
+          placeholder="000.000.000-00" 
+          maxlength="14"
+          (input)="formatarCpf($event)">
+      </mat-form-field>
+  
+      <!-- Botão de pesquisar pessoa pelo CPF -->
+      <button 
+        mat-raised-button 
+        color="accent" 
+        type="button" 
+        (click)="pesquisarPessoa()" 
+        class="mb-3">
+        Pesquisar Pessoa
+      </button>
+  
+      <!-- RG do Cliente -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>RG do Cliente</mat-label>
+        <input matInput formControlName="rg" required>
+      </mat-form-field>
+  
+      <!-- Status -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Status do Cliente</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="ativo">Ativo</mat-option>
+          <mat-option value="inativo">Inativo</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <!-- Botões -->
+      <div class="button-container">
+        <button mat-raised-button color="warn" type="button" (click)="voltar()">Voltar</button>
+        <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+      </div>
+  
     </form>
-</div>
+  </div>

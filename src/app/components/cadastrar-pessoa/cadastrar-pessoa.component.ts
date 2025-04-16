@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PessoaService } from './PessoaService';  // Certifique-se de importar o serviço corretamente
-import { AuthService } from '../../services/auth.service';  // Importando o AuthService para verificar o token
+import { PessoaService } from './PessoaService';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -18,51 +18,88 @@ export class CadastrarPessoaComponent {
     private pessoaService: PessoaService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService // Adicionando o AuthService para verificar o token
+    private authService: AuthService
   ) {
-    // Captura o parâmetro "destino" da URL
     this.route.queryParams.subscribe(params => {
       this.destino = params['destino'];
     });
 
-    // Criação do formulário com validações
     this.pessoaForm = this.fb.group({
       nome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
       sobrenome: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/)]],
-      cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
-      rg: ['', [Validators.required, Validators.pattern(/^\d{2}\.\d{3}\.\d{3}-\d{1}$/)]],
+      cpf: ['', [Validators.required]],
+      rg: ['', [Validators.required]],
       genero: ['', Validators.required],
       nascimento: ['', Validators.required]
     });
   }
 
-  // Método 'Proximo' que será chamado ao clicar no botão
+  formatarCpf(event: any) {
+    let cpf = event.target.value.replace(/\D/g, '');
+    if (cpf.length > 11) cpf = cpf.substring(0, 11);
+
+    if (cpf.length <= 3) {
+      // nada
+    } else if (cpf.length <= 6) {
+      cpf = cpf.replace(/(\d{3})(\d+)/, '$1.$2');
+    } else if (cpf.length <= 9) {
+      cpf = cpf.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
+    } else {
+      cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+    }
+
+    this.pessoaForm.get('cpf')?.setValue(cpf, { emitEvent: false });
+  }
+
+  formatarRg(event: any) {
+    let rg = event.target.value.replace(/\D/g, '');
+    if (rg.length > 9) rg = rg.substring(0, 9);
+  
+    if (rg.length <= 2) {
+      // nada
+    } else if (rg.length <= 5) {
+      rg = rg.replace(/(\d{2})(\d+)/, '$1.$2');
+    } else if (rg.length <= 8) {
+      rg = rg.replace(/(\d{2})(\d{3})(\d+)/, '$1.$2.$3');
+    } else {
+      rg = rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})/, '$1.$2.$3/$4');
+    }
+  
+    this.pessoaForm.get('rg')?.setValue(rg, { emitEvent: false });
+  }
+  
+
   proximo() {
     if (this.pessoaForm.valid) {
-      const pessoaDados = this.pessoaForm.value;
+      const pessoaDados = { ...this.pessoaForm.value };
 
-      // Verificando se o token está presente
+      // Limpar CPF e RG antes de enviar
+      pessoaDados.cpf = pessoaDados.cpf.replace(/\D/g, '');
+      pessoaDados.rg = pessoaDados.rg.replace(/\D/g, '');
+
       const token = this.authService.getToken();
       if (!token) {
         alert('Você precisa estar logado para realizar o cadastro!');
-        this.router.navigate(['/login']); // Redireciona para o login caso o token não exista
+        this.router.navigate(['/login']);
         return;
       }
 
-      // Passando o token como cabeçalho na requisição
       this.pessoaService.cadastrarPessoa(pessoaDados).subscribe(
-
         response => {
-          console.log('Cadastro realizado:', response);
           alert('Cadastro realizado com sucesso!');
 
-          // Redireciona para a página conforme o parâmetro "destino"
+          const queryParams = {
+            nome: response.nome,
+            cpf: response.cpf,
+            pessoaId: response.id
+          };
+
           if (this.destino === 'funcionario') {
-            this.router.navigate(['/funcionarios']);  // Corrigido: `/funcionarios` (plural)
+            this.router.navigate(['/funcionarios'], { queryParams });
           } else if (this.destino === 'cliente') {
-            this.router.navigate(['/clientes']);  // Corrigido: `/clientes` (plural)
+            this.router.navigate(['/clientes'], { queryParams });
           } else {
-            this.router.navigate(['/']); // Fallback para a página inicial
+            this.router.navigate(['/']);
           }
         },
         error => {

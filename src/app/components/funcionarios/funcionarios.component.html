@@ -1,67 +1,78 @@
 <div class="form-container">
-    <h2 class="title">Cadastro de Funcionário</h2>
-    <form [formGroup]="funcionarioForm" (ngSubmit)="onSubmit()">
-  
-      <!-- Linha com Nome -->
-      <mat-form-field appearance="outline" class="campo-nome">
-        <mat-label>Nome</mat-label>
-        <!-- Nome agora é somente leitura -->
-        <input matInput formControlName="nome" [value]="nome" readonly>
+  <h2 class="title">Cadastro de Funcionário</h2>
+  <form [formGroup]="funcionarioForm" (ngSubmit)="onSubmit()">
+
+    <!-- Nome -->
+    <mat-form-field appearance="outline" class="campo-nome">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" readonly>
+    </mat-form-field>
+
+    <!-- CPF e PessoaId -->
+    <div class="linha-pessoa">
+      <mat-form-field appearance="outline" class="campo-cpf">
+        <mat-label>CPF</mat-label>
+        <input
+          matInput
+          formControlName="cpf"
+          maxlength="14"
+          placeholder="000.000.000-00"
+          (input)="formatarCpf($event)"
+        >
       </mat-form-field>
-  
-      <!-- Linha com CPF e ID Pessoa -->
-      <div class="linha-pessoa">
-        <mat-form-field appearance="outline" class="campo-cpf">
-          <mat-label>CPF</mat-label>
-          <!-- CPF pode ser editado manualmente -->
-          <input matInput formControlName="cpf" [value]="cpf">
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline" class="campo-id">
-          <mat-label>ID Pessoa</mat-label>
-          <input matInput [value]="pessoaId" readonly>
-        </mat-form-field>
-  
-        <!-- Botão de Pesquisar Pessoa como Retângulo -->
-        <button
-          mat-raised-button
-          color="accent"
-          type="button"
-          (click)="pesquisarPessoa()"
-          matTooltip="Pesquisar Pessoa"
-          class="btn-pesquisar">
-          Pesquisar Pessoa
-        </button>
-      </div>
-  
-      <!-- Formulário de funcionário -->
-      <mat-form-field appearance="outline">
-        <mat-label>RG do Funcionário</mat-label>
-        <input matInput formControlName="funcionarioRg" required>
+
+      <mat-form-field appearance="outline" class="campo-id">
+        <mat-label>PessoaId</mat-label>
+        <input matInput formControlName="pessoaId" readonly>
       </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Status do Funcionário</mat-label>
-        <mat-select formControlName="funcionarioStatus">
-          <mat-option value="ativo">Ativo</mat-option>
-          <mat-option value="inativo">Inativo</mat-option>
-        </mat-select>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Data de Admissão</mat-label>
-        <input matInput formControlName="dataDeAdmissao" type="date" required>
-      </mat-form-field>
-  
-      <!-- Botões -->
-      <div class="button-container">
-        <button mat-raised-button color="warn" type="button" (click)="voltar()" class="action-btn">
-          Voltar
-        </button>
-  
-        <button mat-raised-button color="primary" class="action-btn" type="submit">
-          Próximo
-        </button>
-      </div>
-    </form>
+
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="pesquisarPessoa()"
+        matTooltip="Pesquisar Pessoa"
+        class="btn-pesquisar">
+        Pesquisar Pessoa
+      </button>
+    </div>
+
+    <!-- Tipo -->
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <input matInput formControlName="tipo" required>
+    </mat-form-field>
+
+    <!-- RG -->
+    <mat-form-field appearance="outline">
+      <mat-label>RG do Funcionário</mat-label>
+      <input matInput formControlName="funcionarioRg" required>
+    </mat-form-field>
+
+    <!-- Status -->
+    <mat-form-field appearance="outline">
+      <mat-label>Status do Funcionário</mat-label>
+      <mat-select formControlName="funcionarioStatus">
+        <mat-option value="ATIVO">Ativo</mat-option>
+        <mat-option value="INATIVO">Inativo</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Data de Admissão -->
+    <mat-form-field appearance="outline">
+      <mat-label>Data de Admissão</mat-label>
+      <input matInput formControlName="dataDeAdmissao" type="date" required>
+    </mat-form-field>
+
+    <!-- Botões -->
+    <div class="button-container">
+      <button mat-raised-button color="warn" type="button" (click)="voltar()" class="action-btn">
+        Voltar
+      </button>
+
+      <button mat-raised-button color="primary" class="action-btn" type="submit">
+        Próximo
+      </button>
+    </div>
+  </form>
 </div>
