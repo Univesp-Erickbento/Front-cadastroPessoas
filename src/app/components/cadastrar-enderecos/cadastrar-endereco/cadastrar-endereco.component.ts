@@ -62,22 +62,20 @@ export class CadastrarEnderecoComponent implements OnInit {
         tipoDeEndereco: rawForm.tipoDeEndereco.toUpperCase()
       };
 
-      // Recuperando o token do localStorage
-      const token = localStorage.getItem('authToken'); // Ajuste de acordo com onde você armazena o token
+      const token = localStorage.getItem('authToken');
 
       if (!token) {
         alert('Token de autenticação não encontrado. Faça login novamente.');
         return;
       }
 
-      // Enviar a requisição com o token no cabeçalho
       this.http.post(
-        'http://localhost:7080/api/enderecos/salvar-endereco', // Alterei aqui
+        'http://localhost:7080/api/enderecos/salvar-endereco',
         enderecoDTO,
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Adicionando o token no cabeçalho
+            'Authorization': `Bearer ${token}`
           }
         }
       ).subscribe({
@@ -112,8 +110,7 @@ export class CadastrarEnderecoComponent implements OnInit {
       return;
     }
 
-    // Recuperando o token do localStorage
-    const token = localStorage.getItem('authToken'); // Ajuste de acordo com onde você armazena o token
+    const token = localStorage.getItem('authToken');
 
     if (!token) {
       alert('Token de autenticação não encontrado. Faça login novamente.');
@@ -122,7 +119,7 @@ export class CadastrarEnderecoComponent implements OnInit {
 
     this.http.get<any>(`http://192.168.15.200:9090/api/pessoas/cpf/${cpf}`, {
       headers: {
-        'Authorization': `Bearer ${token}` // Adicionando o token no cabeçalho
+        'Authorization': `Bearer ${token}`
       }
     }).subscribe(response => {
       if (response) {
@@ -142,8 +139,7 @@ export class CadastrarEnderecoComponent implements OnInit {
     const cepFormatado = cep.replace('-', '');
 
     if (cepFormatado && cepFormatado.length === 8) {
-      // Recuperando o token do localStorage
-      const token = localStorage.getItem('authToken'); // Ajuste de acordo com onde você armazena o token
+      const token = localStorage.getItem('authToken');
 
       if (!token) {
         alert('Token de autenticação não encontrado. Faça login novamente.');
@@ -176,5 +172,25 @@ export class CadastrarEnderecoComponent implements OnInit {
       cep = cep.replace(/(\d{5})(\d{3})/, '$1-$2');
     }
     this.enderecoForm.get('cep')?.setValue(cep);
+  }
+
+  // ✅ Novo método para corrigir o erro do CPF formatado
+  formatarCpf() {
+    const cpfControl = this.enderecoForm.get('cpf');
+    if (cpfControl) {
+      let valor = cpfControl.value.replace(/\D/g, '');
+      if (valor.length > 11) valor = valor.slice(0, 11);
+
+      valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+      valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+      valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+      cpfControl.setValue(valor, { emitEvent: false });
+    }
+  }
+
+  // ✅ Novo método para navegação sem erro
+  navegarParaLista() {
+    this.router.navigate(['/lista-enderecos']);
   }
 }

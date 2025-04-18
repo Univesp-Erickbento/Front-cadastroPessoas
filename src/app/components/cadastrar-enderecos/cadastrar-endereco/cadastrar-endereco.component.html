@@ -1,107 +1,113 @@
-<form [formGroup]="enderecoForm" (ngSubmit)="onSubmit()">
-    <!-- Título do formulário -->
-    <h2 class="form-title">Cadastro de Endereço</h2>
-  
-    <!-- CPF e Pessoa ID na mesma linha -->
-    <div class="form-group">
-      <div class="wide">
-        <label for="cpf">CPF:</label>
-        <input id="cpf" formControlName="cpf" type="text" />
+<div class="form-container">
+  <h2 class="title">Cadastro de Endereço</h2>
+
+  <form [formGroup]="enderecoForm" (ngSubmit)="onSubmit()">
+
+    <!-- CPF e Pessoa ID -->
+    <div class="form-group-row">
+      <div class="form-group cpf-container">
+        <label for="cpf">CPF</label>
+        <input id="cpf" formControlName="cpf" type="text" (input)="formatarCpf()" />
         <div *ngIf="campoInvalido('cpf')" class="erro">CPF é obrigatório.</div>
       </div>
-  
-      <div class="shrink">
-        <label for="pessoaId">Pessoa ID:</label>
+
+      <div class="form-group pessoa-id-container">
+        <label for="pessoaId">Pessoa ID</label>
         <input id="pessoaId" formControlName="pessoaId" type="text" readonly />
       </div>
     </div>
-  
-    <!-- Botão Pesquisar Pessoa abaixo -->
-    <div class="form-group">
-      <div style="width: 100%; text-align: right;">
-        <button type="button" (click)="pesquisarPessoa()">Pesquisar Pessoa</button>
+
+    <!-- CEP e Botão Pesquisar Pessoa -->
+    <div class="form-group-row">
+      <div class="form-group cep-container">
+        <label for="cep">CEP</label>
+        <input id="cep" formControlName="cep" type="text" (input)="formatarCep()" (blur)="buscarEnderecoPorCep()" />
+        <div *ngIf="campoInvalido('cep')" class="erro">CEP é obrigatório.</div>
+        <div *ngIf="enderecoForm.get('cep')?.hasError('pattern')" class="erro">Formato de CEP inválido.</div>
+      </div>
+
+      <div class="form-group button-inline">
+        <label>&nbsp;</label>
+        <button type="button" class="action-btn" (click)="pesquisarPessoa()">Pesquisar Pessoa</button>
       </div>
     </div>
-  
-    <!-- CEP -->
-    <div>
-      <label for="cep">CEP:</label>
-      <input id="cep" formControlName="cep" type="text" (blur)="buscarEnderecoPorCep()" (input)="formatarCep()" />
-      <div *ngIf="campoInvalido('cep')" class="erro">CEP é obrigatório.</div>
-      <div *ngIf="enderecoForm.get('cep')?.hasError('pattern')" class="erro">Formato de CEP inválido.</div>
+
+    <!-- Logradouro, Número e Complemento -->
+    <div class="form-group-row">
+      <div class="form-group logradouro-container">
+        <label for="logradouro">Logradouro</label>
+        <input id="logradouro" formControlName="logradouro" type="text" />
+        <div *ngIf="campoInvalido('logradouro')" class="erro">Logradouro é obrigatório.</div>
+      </div>
+
+      <div class="form-group numero-container">
+        <label for="numero">Número</label>
+        <input id="numero" formControlName="numero" type="text" />
+        <div *ngIf="campoInvalido('numero')" class="erro">Número é obrigatório.</div>
+      </div>
+
+      <div class="form-group complemento-container">
+        <label for="complemento">Complemento</label>
+        <input id="complemento" formControlName="complemento" type="text" />
+      </div>
     </div>
-  
-    <!-- Logradouro -->
-    <div>
-      <label for="logradouro">Logradouro:</label>
-      <input id="logradouro" formControlName="logradouro" type="text" />
-      <div *ngIf="campoInvalido('logradouro')" class="erro">Logradouro é obrigatório.</div>
+
+    <!-- Bairro e Localidade -->
+    <div class="form-group-row">
+      <div class="form-group bairro-container">
+        <label for="bairro">Bairro</label>
+        <input id="bairro" formControlName="bairro" type="text" />
+        <div *ngIf="campoInvalido('bairro')" class="erro">Bairro é obrigatório.</div>
+      </div>
+
+      <div class="form-group localidade-container">
+        <label for="localidade">Localidade</label>
+        <input id="localidade" formControlName="localidade" type="text" />
+        <div *ngIf="campoInvalido('localidade')" class="erro">Localidade é obrigatória.</div>
+      </div>
     </div>
-  
-    <!-- Número -->
-    <div>
-      <label for="numero">Número:</label>
-      <input id="numero" formControlName="numero" type="text" />
-      <div *ngIf="campoInvalido('numero')" class="erro">Número é obrigatório.</div>
+
+    <!-- Estado e País -->
+    <div class="form-group-row">
+      <div class="form-group estado-container">
+        <label for="estado">Estado</label>
+        <input id="estado" formControlName="estado" type="text" />
+        <div *ngIf="campoInvalido('estado')" class="erro">Estado é obrigatório.</div>
+      </div>
+
+      <div class="form-group pais-container">
+        <label for="pais">País</label>
+        <input id="pais" formControlName="pais" type="text" [value]="'Brasil'" [disabled]="true" />
+      </div>
     </div>
-  
-    <!-- Complemento -->
-    <div>
-      <label for="complemento">Complemento:</label>
-      <input id="complemento" formControlName="complemento" type="text" />
+
+    <!-- Perfil e Tipo de Endereço -->
+    <div class="form-group-row">
+      <div class="form-group perfil-container">
+        <label for="perfil">Perfil</label>
+        <select id="perfil" formControlName="perfil">
+          <option value="">Selecione</option>
+          <option value="Funcionario">Funcionário</option>
+          <option value="Cliente">Cliente</option>
+        </select>
+        <div *ngIf="campoInvalido('perfil')" class="erro">Perfil é obrigatório.</div>
+      </div>
+
+      <div class="form-group tipo-endereco-container">
+        <label for="tipoDeEndereco">Tipo de Endereço</label>
+        <select id="tipoDeEndereco" formControlName="tipoDeEndereco">
+          <option value="">Selecione</option>
+          <option value="Residencial">Residencial</option>
+          <option value="Comercial">Comercial</option>
+        </select>
+        <div *ngIf="campoInvalido('tipoDeEndereco')" class="erro">Tipo é obrigatório.</div>
+      </div>
     </div>
-  
-    <!-- Bairro -->
-    <div>
-      <label for="bairro">Bairro:</label>
-      <input id="bairro" formControlName="bairro" type="text" />
-      <div *ngIf="campoInvalido('bairro')" class="erro">Bairro é obrigatório.</div>
+
+    <!-- Botões -->
+    <div class="button-container">
+      <button type="button" class="action-btn" (click)="navegarParaLista()">Voltar</button>
+      <button type="submit" class="submit-btn" [disabled]="enderecoForm.invalid">Salvar Endereço</button>
     </div>
-  
-    <!-- Localidade -->
-    <div>
-      <label for="localidade">Localidade:</label>
-      <input id="localidade" formControlName="localidade" type="text" />
-      <div *ngIf="campoInvalido('localidade')" class="erro">Localidade é obrigatória.</div>
-    </div>
-  
-    <!-- Estado -->
-    <div>
-      <label for="estado">Estado:</label>
-      <input id="estado" formControlName="estado" type="text" />
-      <div *ngIf="campoInvalido('estado')" class="erro">Estado é obrigatório.</div>
-    </div>
-  
-    <!-- País -->
-    <div>
-      <label for="pais">País:</label>
-      <input id="pais" formControlName="pais" type="text" readonly />
-      <div *ngIf="campoInvalido('pais')" class="erro">País é obrigatório.</div>
-    </div>
-  
-    <!-- Perfil -->
-    <div>
-      <label for="perfil">Perfil:</label>
-      <select id="perfil" formControlName="perfil">
-        <option value="">Selecione</option>
-        <option value="Funcionario">Funcionário</option>
-        <option value="Cliente">Cliente</option>
-      </select>
-      <div *ngIf="campoInvalido('perfil')" class="erro">Perfil é obrigatório.</div>
-    </div>
-  
-    <!-- Tipo de Endereço -->
-    <div>
-      <label for="tipoDeEndereco">Tipo de Endereço:</label>
-      <select id="tipoDeEndereco" formControlName="tipoDeEndereco">
-        <option value="">Selecione</option>
-        <option value="Residencial">Residencial</option>
-        <option value="Comercial">Comercial</option>
-      </select>
-      <div *ngIf="campoInvalido('tipoDeEndereco')" class="erro">Tipo é obrigatório.</div>
-    </div>
-  
-    <!-- Botão para Submissão -->
-    <button type="submit">Salvar Endereço</button>
   </form>
-  
+</div>

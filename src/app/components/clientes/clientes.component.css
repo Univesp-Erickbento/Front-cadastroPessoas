@@ -1,96 +1,98 @@
 /* 🎯 Container principal */
 .form-container {
-    background-color: #1a1a1a;
-    width: 40%;
-    padding: 2rem;
-    margin: 2rem auto;
-    border-radius: 0.7rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* 🧾 Título */
-  .title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    width: 50%;
-    margin: 1.5rem auto;
-    background-color: #1a1a1a;
-  }
-  
-  /* 🧩 Campos de formulário */
-  mat-form-field {
-    width: 100%;
-    display: block;
-    margin-bottom: 1.2rem;
-  }
-  
-  mat-form-field input, mat-form-field.mat-form-field input {
-    color: white;
-  }
-  
-  /* 🧷 Label dos campos */
-  .mat-form-field-label {
-    color: #aaa !important;
-  }
-  
-  /* 📘 Botão principal */
-  .submit-btn {
-    background-color: #1a73e8;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: 0.4rem;
-    transition: background-color 0.3s;
-    margin-top: 1rem;
-  }
-  
-  .submit-btn:hover {
-    background-color: #145bb7;
-  }
-  
-  /* ↩️ Botões secundários */
-  button.mat-raised-button:not(.submit-btn) {
-    background-color: #444;
-    color: white;
-    margin-right: 1rem;
-  }
-  
-  button.mat-raised-button:not(.submit-btn):hover {
-    background-color: #555;
-  }
-  
-  /* 🎯 Responsividade */
-  @media (max-width: 768px) {
-    .form-container {
+  background-color: #1a1a1a;
+  width: 40%;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 0.7rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 🧾 Título - AJUSTADO para ficar igual ao do cadastro de funcionário */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  width: 60%; /* igual ao cadastro de funcionário */
+  margin: 1.5rem auto; /* centralizado */
+  background-color: #1a1a1a;
+  white-space: nowrap; /* impede quebra de linha */
+}
+
+
+/* 🧩 Campos de formulário */
+mat-form-field {
+  width: 100%;
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+mat-form-field input,
+mat-form-field.mat-form-field input {
+  color: white;
+}
+
+/* 🧷 Label dos campos */
+.mat-form-field-label {
+  color: #aaa !important;
+}
+
+/* 📘 Botão principal */
+.submit-btn {
+  background-color: #1a73e8;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: #145bb7;
+}
+
+/* ↩️ Botões secundários */
+button.mat-raised-button:not(.submit-btn) {
+  background-color: #444;
+  color: white;
+  margin-right: 1rem;
+}
+
+button.mat-raised-button:not(.submit-btn):hover {
+  background-color: #555;
+}
+
+/* 🎯 Responsividade */
+@media (max-width: 768px) {
+  .form-container {
       width: 90%;
       padding: 1.5rem;
-    }
-  
-    .title {
+  }
+
+  .title {
       font-size: 1.5rem;
       width: 80%;
-    }
-  
-    .submit-btn {
+  }
+
+  .submit-btn {
       font-size: 0.9rem;
       padding: 0.6rem;
-    }
-  
-    button.mat-raised-button {
+  }
+
+  button.mat-raised-button {
       width: 100%;
       margin-bottom: 1rem;
-    }
   }
-  
-  /* 🧼 Extra: campo readonly mais legível */
-  input[readonly] {
-    opacity: 0.7;
-  }
-  
+}
+
+/* 🧼 Extra: campo readonly mais legível */
+input[readonly] {
+  opacity: 0.7;
+}
