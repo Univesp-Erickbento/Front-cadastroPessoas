@@ -50,7 +50,7 @@ mat-icon {
 }
 
 /* Botão de ação */
-.submit-btn {
+.submit-btn, .action-btn {
   background-color: #1a73e8;
   color: white;
   font-size: 1rem;
@@ -61,7 +61,7 @@ mat-icon {
   transition: 0.3s;
 }
 
-.submit-btn:hover {
+.submit-btn:hover, .action-btn:hover {
   background-color: #145bb7;
 }
 
@@ -99,12 +99,32 @@ mat-checkbox {
   }
 
   .title {
-      font-size: 1.5rem;
-      width: 70%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 60%; /* igual ao cadastro de funcionário */
+    margin: 1.5rem auto; /* centralizado */
+    background-color: #1a1a1a;
+    white-space: nowrap; /* impede quebra de linha */
   }
-
-  .submit-btn {
+  
+  
+  
+  .submit-btn, .action-btn {
       font-size: 0.875rem;
       padding: 0.6rem;
   }
+
+  .button-container {
+      flex-direction: column;
+      gap: 10px;
+  }
+}
+
+input[readonly] {
+  opacity: 0.7;
 }
