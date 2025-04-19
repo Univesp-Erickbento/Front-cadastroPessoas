@@ -1,24 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChildren,
+  QueryList
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatFormField } from '@angular/material/form-field';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClienteComponent implements OnInit {
+export class ClienteComponent implements OnInit, AfterViewInit {
   clienteForm!: FormGroup;
   nome: string | null = null;
   cpf: string | null = null;
   pessoaId: string | null = null;
 
+  @ViewChildren(MatFormField) formFields!: QueryList<MatFormField>;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -30,18 +41,23 @@ export class ClienteComponent implements OnInit {
 
     this.clienteForm = this.fb.group({
       id: [{ value: this.gerarId(), disabled: true }],
-      rg: ['', Validators.required],
-      status: ['', Validators.required],
-      nome: [this.nome],
-      cpf: [this.cpf || '', Validators.required]
+      nome: [{ value: this.nome, disabled: true }],
+      cpf: [this.cpf || '', Validators.required],
+      pessoaId: [this.pessoaId || ''],
+      clienteReg: ['', Validators.required],  // Ajustado para clienteReg
+      clienteStatus: ['', Validators.required]
     });
+    
 
-    if (this.nome && this.cpf) {
-      this.clienteForm.patchValue({
-        nome: this.nome,
-        cpf: this.cpf
-      });
+    if (this.nome) {
+      this.clienteForm.patchValue({ nome: this.nome });
     }
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
   }
 
   gerarId(): string {
@@ -68,23 +84,25 @@ export class ClienteComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.clienteForm.valid && this.pessoaId) {
-      const cpfLimpo = this.clienteForm.get('cpf')?.value.replace(/\D/g, '');
+    const token = this.authService.getToken();
+    console.log('🔐 Token no onSubmit:', token);
 
+    if (!token) {
+      alert('Usuário não autenticado. Faça login novamente.');
+      return;
+    }
+
+    const formRaw = this.clienteForm.getRawValue();
+    console.log('📝 Form Raw:', formRaw);
+
+    if (this.clienteForm.valid) {
       const clienteDTO = {
-        pessoaId: this.pessoaId,
-        cpf: cpfLimpo,
-        clienteRg: this.clienteForm.get('rg')?.value,
-        clienteStatus: this.clienteForm.get('status')?.value,
+        pessoaId: formRaw.pessoaId,
+        cpf: formRaw.cpf.replace(/\D/g, ''),
+        clienteReg: formRaw.clienteReg,  // Ajustado para clienteReg
+        clienteStatus: formRaw.clienteStatus,
         dataDeCadastro: new Date()
       };
-
-      const token = localStorage.getItem('token');
-
-      if (!token) {
-        alert('Usuário não autenticado. Faça login novamente.');
-        return;
-      }
 
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -93,19 +111,19 @@ export class ClienteComponent implements OnInit {
 
       this.http.post('http://localhost:8080/api/clientes/adicionar', clienteDTO, { headers })
         .subscribe({
-          next: (res: any) => {
-            alert('Cliente cadastrado com sucesso!');
+          next: () => {
+            alert('✅ Cliente cadastrado com sucesso!');
             this.router.navigate(['/lista-clientes']);
           },
           error: (err) => {
-            console.error('Erro ao cadastrar cliente:', err);
-            const message = err.error || 'Erro ao cadastrar cliente.';
+            console.error('❌ Erro ao cadastrar cliente:', err);
+            const message = err.error?.message || 'Erro ao cadastrar cliente.';
             alert(message);
           }
         });
 
     } else {
-      alert('Preencha todos os campos e selecione uma pessoa antes de continuar.');
+      alert('Preencha todos os campos obrigatórios e selecione uma pessoa antes de continuar.');
     }
   }
 
@@ -117,28 +135,36 @@ export class ClienteComponent implements OnInit {
     const cpfPesquisado = this.clienteForm.get('cpf')?.value.replace(/\D/g, '');
 
     if (cpfPesquisado) {
-      this.http.get(`http://localhost:9090/api/pessoas?cpf=${cpfPesquisado}`).subscribe(
-        (response: any) => {
-          if (response && response.nome && response.cpf) {
-            this.nome = response.nome;
-            this.cpf = response.cpf;
-            this.pessoaId = response.id;
+      const token = this.authService.getToken();
 
-            this.clienteForm.patchValue({
-              nome: this.nome,
-              cpf: this.cpf
-            });
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
 
-            alert('Pessoa encontrada com sucesso!');
-          } else {
-            alert('Pessoa não encontrada!');
+      this.http.get(`http://localhost:9090/api/pessoas?cpf=${cpfPesquisado}`, { headers })
+        .subscribe(
+          (response: any) => {
+            if (response && response.nome && response.id) {
+              this.nome = response.nome;
+              this.cpf = response.cpf;
+              this.pessoaId = response.id;
+
+              this.clienteForm.patchValue({
+                nome: this.nome,
+                cpf: this.cpf,
+                pessoaId: this.pessoaId
+              });
+
+              alert('Pessoa encontrada com sucesso!');
+            } else {
+              alert('Pessoa não encontrada!');
+            }
+          },
+          error => {
+            alert('Erro ao buscar pessoa no banco de dados!');
+            console.error(error);
           }
-        },
-        error => {
-          alert('Erro ao buscar pessoa no banco de dados!');
-          console.error(error);
-        }
-      );
+        );
     } else {
       alert('Por favor, insira um CPF para pesquisar.');
     }

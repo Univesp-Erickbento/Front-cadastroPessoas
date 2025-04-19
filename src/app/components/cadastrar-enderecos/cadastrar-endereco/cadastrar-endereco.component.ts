@@ -10,7 +10,7 @@ import { BuscarCepService } from '../../../services/buscar.cep.service';
   styleUrls: ['./cadastrar-endereco.component.css']
 })
 export class CadastrarEnderecoComponent implements OnInit {
-  enderecoForm: FormGroup;
+  enderecoForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -18,30 +18,36 @@ export class CadastrarEnderecoComponent implements OnInit {
     private buscarCepService: BuscarCepService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.enderecoForm = this.fb.group({
-      cpf: ['', Validators.required],
-      pessoaId: [{ value: '', disabled: true }],
-      cep: ['', [Validators.required, Validators.pattern('[0-9]{5}-[0-9]{3}')]],
-      logradouro: ['', Validators.required],
-      numero: ['', Validators.required],
-      complemento: [''],
-      bairro: ['', Validators.required],
-      localidade: ['', Validators.required],
-      estado: ['', Validators.required],
-      pais: ['Brasil', Validators.required],
-      perfil: ['', Validators.required],
-      tipoDeEndereco: ['', Validators.required]
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.enderecoForm = this.fb.group({
+      nome: [{ value: null, disabled: true }],
+      cpf: [null, Validators.required],
+      pessoaId: [null],
+      cep: [null, [Validators.required, Validators.pattern('[0-9]{5}-[0-9]{3}')]],
+      logradouro: [null, Validators.required],
+      numero: [null, Validators.required],
+      complemento: [null],
+      bairro: [null, Validators.required],
+      localidade: [null, Validators.required],
+      estado: [null, Validators.required],
+      pais: ['Brasil', Validators.required],
+      perfil: [null, Validators.required],
+      tipoDeEndereco: [null, Validators.required]
+    });
+
+    // Preencher valores via queryParams, se vierem da rota
     this.route.queryParams.subscribe(params => {
+      const nome = params['nome'];
       const cpf = params['cpf'];
       const pessoaId = params['pessoaId'];
 
-      if (cpf) this.enderecoForm.get('cpf')?.setValue(cpf);
-      if (pessoaId) this.enderecoForm.get('pessoaId')?.setValue(pessoaId);
+      this.enderecoForm.patchValue({
+        nome,
+        cpf,
+        pessoaId
+      });
     });
   }
 
@@ -59,11 +65,10 @@ export class CadastrarEnderecoComponent implements OnInit {
         logradouro: rawForm.logradouro,
         localidade: rawForm.localidade,
         uf: rawForm.estado,
-        tipoDeEndereco: rawForm.tipoDeEndereco.toUpperCase()
+        tipoDeEndereco: rawForm.tipoDeEndereco?.toUpperCase()
       };
 
       const token = localStorage.getItem('authToken');
-
       if (!token) {
         alert('Token de autenticação não encontrado. Faça login novamente.');
         return;
@@ -104,43 +109,44 @@ export class CadastrarEnderecoComponent implements OnInit {
 
   pesquisarPessoa() {
     const cpf = this.enderecoForm.get('cpf')?.value;
-
     if (!cpf) {
       alert('Por favor, preencha o CPF!');
       return;
     }
 
     const token = localStorage.getItem('authToken');
-
     if (!token) {
       alert('Token de autenticação não encontrado. Faça login novamente.');
       return;
     }
 
     this.http.get<any>(`http://192.168.15.200:9090/api/pessoas/cpf/${cpf}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
+      headers: { 'Authorization': `Bearer ${token}` }
+    }).subscribe(
+      response => {
+        if (response) {
+          this.enderecoForm.patchValue({
+            nome: response.nome,
+            pessoaId: response.id
+          });
+          console.log('Pessoa encontrada:', response);
+        } else {
+          alert('Pessoa não encontrada.');
+        }
+      },
+      error => {
+        alert('Erro ao buscar pessoa.');
+        console.error(error);
       }
-    }).subscribe(response => {
-      if (response) {
-        this.enderecoForm.get('pessoaId')?.setValue(response.id);
-        console.log('Pessoa encontrada:', response);
-      } else {
-        alert('Pessoa não encontrada.');
-      }
-    }, error => {
-      alert('Erro ao buscar pessoa.');
-      console.error(error);
-    });
+    );
   }
 
   buscarEnderecoPorCep() {
     let cep = this.enderecoForm.get('cep')?.value;
-    const cepFormatado = cep.replace('-', '');
+    const cepFormatado = cep?.replace('-', '');
 
     if (cepFormatado && cepFormatado.length === 8) {
       const token = localStorage.getItem('authToken');
-
       if (!token) {
         alert('Token de autenticação não encontrado. Faça login novamente.');
         return;
@@ -165,7 +171,7 @@ export class CadastrarEnderecoComponent implements OnInit {
 
   formatarCep() {
     let cep = this.enderecoForm.get('cep')?.value;
-    cep = cep.replace(/\D/g, '');
+    cep = cep?.replace(/\D/g, '');
     if (cep.length <= 5) {
       cep = cep.replace(/(\d{5})(\d{1,3})?/, '$1-$2');
     } else {
@@ -174,11 +180,10 @@ export class CadastrarEnderecoComponent implements OnInit {
     this.enderecoForm.get('cep')?.setValue(cep);
   }
 
-  // ✅ Novo método para corrigir o erro do CPF formatado
-  formatarCpf() {
+  formatarCpf(event: Event) {
     const cpfControl = this.enderecoForm.get('cpf');
     if (cpfControl) {
-      let valor = cpfControl.value.replace(/\D/g, '');
+      let valor = (event.target as HTMLInputElement).value.replace(/\D/g, '');
       if (valor.length > 11) valor = valor.slice(0, 11);
 
       valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
@@ -189,7 +194,6 @@ export class CadastrarEnderecoComponent implements OnInit {
     }
   }
 
-  // ✅ Novo método para navegação sem erro
   navegarParaLista() {
     this.router.navigate(['/lista-enderecos']);
   }

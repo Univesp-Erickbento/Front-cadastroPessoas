@@ -3,111 +3,129 @@
 
   <form [formGroup]="enderecoForm" (ngSubmit)="onSubmit()">
 
-    <!-- CPF e Pessoa ID -->
-    <div class="form-group-row">
-      <div class="form-group cpf-container">
-        <label for="cpf">CPF</label>
-        <input id="cpf" formControlName="cpf" type="text" (input)="formatarCpf()" />
-        <div *ngIf="campoInvalido('cpf')" class="erro">CPF é obrigatório.</div>
-      </div>
+    <!-- Nome -->
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" readonly />
+    </mat-form-field>
 
-      <div class="form-group pessoa-id-container">
-        <label for="pessoaId">Pessoa ID</label>
-        <input id="pessoaId" formControlName="pessoaId" type="text" readonly />
-      </div>
+    <!-- CPF, PessoaId e Botão -->
+    <div class="linha-pessoa">
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input
+          matInput
+          formControlName="cpf"
+          maxlength="14"
+          placeholder="000.000.000-00"
+          (input)="formatarCpf($event)">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>PessoaId</mat-label>
+        <input matInput formControlName="pessoaId" readonly />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="pesquisarPessoa()"
+        matTooltip="Pesquisar Pessoa"
+        class="btn-pesquisar">
+        Pesquisar Pessoa
+      </button>
     </div>
 
-    <!-- CEP e Botão Pesquisar Pessoa -->
+    <!-- CEP -->
+    <mat-form-field appearance="outline">
+      <mat-label>CEP</mat-label>
+      <input matInput formControlName="cep" (input)="formatarCep()" (blur)="buscarEnderecoPorCep()" />
+      <mat-error *ngIf="campoInvalido('cep')">CEP é obrigatório.</mat-error>
+      <mat-error *ngIf="enderecoForm.get('cep')?.hasError('pattern')">Formato de CEP inválido.</mat-error>
+    </mat-form-field>
+    
+    <!-- Logradouro -->
+    <mat-form-field appearance="outline">
+      <mat-label>Logradouro</mat-label>
+      <input matInput formControlName="logradouro" required>
+    </mat-form-field>
+
+    <!-- Complemento e Número -->
     <div class="form-group-row">
-      <div class="form-group cep-container">
-        <label for="cep">CEP</label>
-        <input id="cep" formControlName="cep" type="text" (input)="formatarCep()" (blur)="buscarEnderecoPorCep()" />
-        <div *ngIf="campoInvalido('cep')" class="erro">CEP é obrigatório.</div>
-        <div *ngIf="enderecoForm.get('cep')?.hasError('pattern')" class="erro">Formato de CEP inválido.</div>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="complemento">
+      </mat-form-field>
 
-      <div class="form-group button-inline">
-        <label>&nbsp;</label>
-        <button type="button" class="action-btn" (click)="pesquisarPessoa()">Pesquisar Pessoa</button>
-      </div>
-    </div>
-
-    <!-- Logradouro, Número e Complemento -->
-    <div class="form-group-row">
-      <div class="form-group logradouro-container">
-        <label for="logradouro">Logradouro</label>
-        <input id="logradouro" formControlName="logradouro" type="text" />
-        <div *ngIf="campoInvalido('logradouro')" class="erro">Logradouro é obrigatório.</div>
-      </div>
-
-      <div class="form-group numero-container">
-        <label for="numero">Número</label>
-        <input id="numero" formControlName="numero" type="text" />
-        <div *ngIf="campoInvalido('numero')" class="erro">Número é obrigatório.</div>
-      </div>
-
-      <div class="form-group complemento-container">
-        <label for="complemento">Complemento</label>
-        <input id="complemento" formControlName="complemento" type="text" />
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="numero" required>
+      </mat-form-field>
     </div>
 
     <!-- Bairro e Localidade -->
     <div class="form-group-row">
-      <div class="form-group bairro-container">
-        <label for="bairro">Bairro</label>
-        <input id="bairro" formControlName="bairro" type="text" />
-        <div *ngIf="campoInvalido('bairro')" class="erro">Bairro é obrigatório.</div>
-      </div>
-
-      <div class="form-group localidade-container">
-        <label for="localidade">Localidade</label>
-        <input id="localidade" formControlName="localidade" type="text" />
-        <div *ngIf="campoInvalido('localidade')" class="erro">Localidade é obrigatória.</div>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro" required>
+      </mat-form-field>
+     
+      <mat-form-field appearance="outline">
+        <mat-label>Localidade</mat-label>
+        <input matInput formControlName="localidade" required>
+      </mat-form-field>
     </div>
 
     <!-- Estado e País -->
     <div class="form-group-row">
-      <div class="form-group estado-container">
-        <label for="estado">Estado</label>
-        <input id="estado" formControlName="estado" type="text" />
-        <div *ngIf="campoInvalido('estado')" class="erro">Estado é obrigatório.</div>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="estado" required>
+      </mat-form-field>
 
-      <div class="form-group pais-container">
-        <label for="pais">País</label>
-        <input id="pais" formControlName="pais" type="text" [value]="'Brasil'" [disabled]="true" />
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>País</mat-label>
+        <input matInput formControlName="pais" required>
+      </mat-form-field>
     </div>
 
     <!-- Perfil e Tipo de Endereço -->
     <div class="form-group-row">
-      <div class="form-group perfil-container">
-        <label for="perfil">Perfil</label>
-        <select id="perfil" formControlName="perfil">
-          <option value="">Selecione</option>
-          <option value="Funcionario">Funcionário</option>
-          <option value="Cliente">Cliente</option>
-        </select>
-        <div *ngIf="campoInvalido('perfil')" class="erro">Perfil é obrigatório.</div>
-      </div>
-
-      <div class="form-group tipo-endereco-container">
-        <label for="tipoDeEndereco">Tipo de Endereço</label>
-        <select id="tipoDeEndereco" formControlName="tipoDeEndereco">
-          <option value="">Selecione</option>
-          <option value="Residencial">Residencial</option>
-          <option value="Comercial">Comercial</option>
-        </select>
-        <div *ngIf="campoInvalido('tipoDeEndereco')" class="erro">Tipo é obrigatório.</div>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Perfil</mat-label>
+        <mat-select formControlName="perfil" required>
+          <mat-option value="">Selecione</mat-option>
+          <mat-option value="Funcionario">Funcionário</mat-option>
+          <mat-option value="Cliente">Cliente</mat-option>
+        </mat-select>
+        <mat-error *ngIf="campoInvalido('perfil')">
+          Perfil é obrigatório.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Endereço</mat-label>
+        <mat-select formControlName="tipoDeEndereco" required>
+          <mat-option value="">Selecione</mat-option>
+          <mat-option value="Residencial">Residencial</mat-option>
+          <mat-option value="Comercial">Comercial</mat-option>
+        </mat-select>
+        <mat-error *ngIf="campoInvalido('tipoDeEndereco')">
+          Tipo é obrigatório.
+        </mat-error>
+      </mat-form-field>
     </div>
 
     <!-- Botões -->
     <div class="button-container">
-      <button type="button" class="action-btn" (click)="navegarParaLista()">Voltar</button>
-      <button type="submit" class="submit-btn" [disabled]="enderecoForm.invalid">Salvar Endereço</button>
+      <button mat-raised-button color="warn" type="button" (click)="navegarParaLista()" class="action-btn">
+        Voltar
+      </button>
+
+      <button mat-raised-button color="primary" class="action-btn" type="submit">
+        Próximo
+      </button>
     </div>
   </form>
 </div>

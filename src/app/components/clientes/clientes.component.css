@@ -1,14 +1,18 @@
-/* 🎯 Container principal */
+/* Container principal do formulário */
 .form-container {
   background-color: #1a1a1a;
-  width: 40%;
+  max-width: 600px;
+  width: 90%;
   padding: 2rem;
   margin: 2rem auto;
   border-radius: 0.7rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* 🧾 Título - AJUSTADO para ficar igual ao do cadastro de funcionário */
+/* Título centralizado com destaque */
 .title {
   text-align: center;
   font-size: 2rem;
@@ -17,82 +21,118 @@
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  width: 60%; /* igual ao cadastro de funcionário */
-  margin: 1.5rem auto; /* centralizado */
+  width: 60%;
+  margin: 1.5rem auto;
   background-color: #1a1a1a;
-  white-space: nowrap; /* impede quebra de linha */
 }
 
+/* Linha com campos de Pessoa (ID, Nome, CPF) */
+.linha-pessoa {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
 
-/* 🧩 Campos de formulário */
+/* Ajuste de largura para o campo "ID Pessoa" */
+.campo-id {
+  width: 20%; /* ID Pessoa ocupa 30% da largura */
+}
+
+/* Ajuste de largura para o campo "CPF" */
+.campo-cpf {
+  width: 55%; /* CPF ocupa 40% da largura */
+}
+
+/* Ajuste de largura para o campo "Nome" */
+.campo-nome {
+  width: 100%; /* Nome ocupa 45% da largura */
+}
+
+/* Estilo dos campos de entrada */
 mat-form-field {
   width: 100%;
   display: block;
-  margin-bottom: 1.2rem;
+  margin-bottom: 16px;
 }
 
+/* Inputs dentro de mat-form-field */
 mat-form-field input,
 mat-form-field.mat-form-field input {
   color: white;
 }
 
-/* 🧷 Label dos campos */
-.mat-form-field-label {
-  color: #aaa !important;
+/* Estilo dos botões */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-/* 📘 Botão principal */
-.submit-btn {
-  background-color: #1a73e8;
-  color: white;
-  font-size: 1rem;
+.action-btn {
+  flex: 1;
   font-weight: bold;
-  width: 100%;
   padding: 0.8rem;
   border-radius: 0.4rem;
-  transition: background-color 0.3s;
-  margin-top: 1rem;
+  font-size: 1rem;
+  transition: 0.3s;
+  color: white;
+  text-align: center;
 }
 
-.submit-btn:hover {
+/* Estilo do botão de submit */
+.action-btn[type='submit'] {
+  background-color: #1a73e8;
+}
+
+.action-btn[type='submit']:hover {
   background-color: #145bb7;
 }
 
-/* ↩️ Botões secundários */
-button.mat-raised-button:not(.submit-btn) {
-  background-color: #444;
-  color: white;
-  margin-right: 1rem;
+/* Estilo do botão de ação (voltar) */
+.action-btn[type='button'] {
+  background-color: #d32f2f;
 }
 
-button.mat-raised-button:not(.submit-btn):hover {
-  background-color: #555;
+.action-btn[type='button']:hover {
+  background-color: #9a1f1f;
 }
 
-/* 🎯 Responsividade */
+/* Estilos responsivos */
 @media (max-width: 768px) {
   .form-container {
-      width: 90%;
+      width: 95%;
       padding: 1.5rem;
   }
 
   .title {
       font-size: 1.5rem;
-      width: 80%;
+      width: 80%; /* Ajustando a largura do título em telas pequenas */
   }
 
-  .submit-btn {
-      font-size: 0.9rem;
+  .action-btn {
+      font-size: 0.875rem;
       padding: 0.6rem;
   }
 
-  button.mat-raised-button {
-      width: 100%;
-      margin-bottom: 1rem;
+  .button-container {
+      flex-direction: column;
+      gap: 10px; /* Ajustando o espaçamento entre os botões em telas pequenas */
   }
-}
 
-/* 🧼 Extra: campo readonly mais legível */
-input[readonly] {
-  opacity: 0.7;
+  .linha-pessoa {
+      flex-direction: column;
+      gap: 12px; /* Ajustando o espaçamento entre os campos na versão mobile */
+  }
+
+  /* Ajustando as larguras dos campos em telas menores */
+  .campo-id,
+  .campo-cpf,
+  .campo-nome {
+      width: 100%; /* Em telas pequenas, os campos ocupam 100% da largura */
+  }
+
+  mat-form-field {
+      margin-bottom: 12px; /* Menor espaçamento entre campos */
+  }
 }
