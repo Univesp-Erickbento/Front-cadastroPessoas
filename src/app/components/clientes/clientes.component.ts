@@ -33,12 +33,14 @@ export class ClienteComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    // Recebe os parâmetros da URL se existirem
     this.route.queryParams.subscribe(params => {
       this.nome = params['nome'] || null;
       this.cpf = params['cpf'] || null;
       this.pessoaId = params['pessoaId'] || null;
     });
 
+    // Inicializa o formulário
     this.clienteForm = this.fb.group({
       id: [{ value: this.gerarId(), disabled: true }],
       nome: [{ value: this.nome, disabled: true }],
@@ -47,7 +49,6 @@ export class ClienteComponent implements OnInit, AfterViewInit {
       clienteReg: ['', Validators.required],  // Ajustado para clienteReg
       clienteStatus: ['', Validators.required]
     });
-    
 
     if (this.nome) {
       this.clienteForm.patchValue({ nome: this.nome });
@@ -83,7 +84,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
     this.clienteForm.get('cpf')?.setValue(cpf);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const token = this.authService.getToken();
     console.log('🔐 Token no onSubmit:', token);
 
@@ -99,7 +100,7 @@ export class ClienteComponent implements OnInit, AfterViewInit {
       const clienteDTO = {
         pessoaId: formRaw.pessoaId,
         cpf: formRaw.cpf.replace(/\D/g, ''),
-        clienteReg: formRaw.clienteReg,  // Ajustado para clienteReg
+        clienteReg: formRaw.clienteReg,
         clienteStatus: formRaw.clienteStatus,
         dataDeCadastro: new Date()
       };
@@ -113,7 +114,13 @@ export class ClienteComponent implements OnInit, AfterViewInit {
         .subscribe({
           next: () => {
             alert('✅ Cliente cadastrado com sucesso!');
-            this.router.navigate(['/lista-clientes']);
+            // Navegar para a página de cadastro de endereço e passar os parâmetros
+            this.router.navigate(['/cadastrar-endereco'], {
+              queryParams: {
+                pessoaId: formRaw.pessoaId,
+                cpf: formRaw.cpf.replace(/\D/g, '') // Se precisar passar o CPF também
+              }
+            });
           },
           error: (err) => {
             console.error('❌ Erro ao cadastrar cliente:', err);
