@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
+import { MenuComponent } from './components/menu/menu.component';
+
 import { RegistrarComponent } from './components/login/registrar/registrar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/entrar/login.component';
@@ -16,6 +18,7 @@ const routes: Routes = [
     path: '', component: NavComponent, children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
+      { path: 'menu', component: MenuComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'registrar', component: RegistrarComponent },
       { path: 'login', component: LoginComponent },

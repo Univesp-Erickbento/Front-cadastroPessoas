@@ -1,0 +1,36 @@
+<div class="button-grid">
+  <!-- Botão para Cadastrar Funcionário, passando 'destino' como 'funcionario' -->
+  <button class="action-button" 
+          [routerLink]="['/cadastrar-pessoa']" 
+          [queryParams]="{ destino: 'funcionario' }">
+    Cadastrar Funcionário
+  </button>
+
+  <!-- Botão para Cadastrar Cliente, passando 'destino' como 'cliente' -->
+  <button class="action-button" 
+          [routerLink]="['/cadastrar-pessoa']" 
+          [queryParams]="{ destino: 'cliente' }">
+    Cadastrar Cliente
+  </button>
+
+  <!-- Outros botões podem continuar os mesmos -->
+  <button class="action-button" [routerLink]="'/settings'">
+    Cadastrar Estabelecimento
+  </button>
+
+  <button class="action-button" [routerLink]="'/funcionarios'">
+    Pesquisar Funcionário
+  </button>
+
+  <button class="action-button" [routerLink]="'/settings'">
+    Pesquisar Estabelecimento
+  </button>
+
+  <button class="action-button" [routerLink]="'/settings'">
+    Fazer Agendamento
+  </button>
+
+  <button class="action-button" [routerLink]="'/settings'">
+    Cadastrar Tipo de Serviço
+  </button>
+</div>

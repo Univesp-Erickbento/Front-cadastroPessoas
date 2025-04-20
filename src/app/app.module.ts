@@ -28,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
+import { MenuComponent } from './components/menu/menu.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RegistrarComponent } from './components/login/registrar/registrar.component';
 import { LoginComponent } from './components/login/entrar/login.component';
@@ -48,6 +49,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppComponent,
     NavComponent,
     HomeComponent,
+    MenuComponent,
     PerfilComponent,
     RegistrarComponent,
     LoginComponent,
