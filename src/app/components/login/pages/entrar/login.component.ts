@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service'; // Certifique-se de que o caminho está correto
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,18 +8,20 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   entrarForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     // Inicializando o formulário com os campos nomeUsuario e senha
     this.entrarForm = this.fb.group({
       nomeUsuario: ['', Validators.required],
-      senha: ['', Validators.required]
+      senha: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -56,5 +58,15 @@ export class LoginComponent {
       console.warn('⚠️ Formulário de login inválido.');
       alert('Por favor, preencha todos os campos corretamente.');
     }
+  }
+
+  // Método para navegação (pode ser usado para navegação para uma página de cadastro)
+  navigate() {
+    this.router.navigate(['/registrar']); // Exemplo de navegação para página de cadastro
+  }
+
+  // Função para recuperação de senha
+  forgotPassword() {
+    this.router.navigate(['/forgot-password']);
   }
 }

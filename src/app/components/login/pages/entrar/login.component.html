@@ -1,0 +1,32 @@
+<app-default-login-layout
+    title="Entrar na sua conta"
+    primaryBtnText="Fazer login"
+    secondaryBtnText="Criar uma conta"
+    (submit)="entrar()"
+    (navigate)="navigate()"
+    [disablePrimaryBtn]="!entrarForm.valid"
+>
+    <form [formGroup]="entrarForm">
+        <app-primary-input
+            formControlName="nomeUsuario"
+            inputName="nomeUsuario"
+            type="text"
+            label="Nome de Usuário"
+            placeholder="Insira seu nome de usuário"
+        >
+            <img src="/assets/svg/user-icon.svg"/>
+        </app-primary-input>
+
+        <app-primary-input
+            formControlName="senha"
+            inputName="senha"
+            type="password"
+            label="Senha"
+            placeholder="Sua senha"
+        >
+            <img src="/assets/svg/password-icon.svg"/>
+        </app-primary-input>
+
+        <span (click)="forgotPassword()">Esqueceu a senha?</span>
+    </form>
+</app-default-login-layout>

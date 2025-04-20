@@ -1,0 +1,30 @@
+<app-default-login-layout
+  title="Crie sua conta"
+  primaryBtnText="Cadastrar"
+  secondaryBtnText="Já tenho uma conta"
+  (submit)="registrar()"
+  (navigate)="irParaLogin()"
+  [disablePrimaryBtn]="!registrarForm.valid"
+>
+  <form [formGroup]="registrarForm">
+    <app-primary-input
+      formControlName="nomeUsuario"
+      inputName="nomeUsuario"
+      type="text"
+      label="Nome de Usuário"
+      placeholder="Seu nome de usuário"
+    >
+      <img src="/assets/svg/email-icon.svg"/>
+    </app-primary-input>
+
+    <app-primary-input
+      formControlName="senha"
+      inputName="senha"
+      type="password"
+      label="Senha"
+      placeholder="Sua senha"
+    >
+      <img src="/assets/svg/password-icon.svg"/>
+    </app-primary-input>
+  </form>
+</app-default-login-layout>

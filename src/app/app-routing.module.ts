@@ -4,9 +4,9 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 
-import { RegistrarComponent } from './components/login/registrar/registrar.component';
+import { RegistrarComponent } from './components/login/pages/registrar/registrar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { LoginComponent } from './components/login/entrar/login.component';
+import { LoginComponent } from './components/login/pages/entrar/login.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { ClienteComponent } from './components/clientes/clientes.component';

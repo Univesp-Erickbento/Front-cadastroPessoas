@@ -30,8 +30,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { RegistrarComponent } from './components/login/registrar/registrar.component';
-import { LoginComponent } from './components/login/entrar/login.component';
+import { RegistrarComponent } from './components/login/pages/registrar/registrar.component';
+import { LoginComponent } from './components/login/pages/entrar/login.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { ClienteComponent } from './components/clientes/clientes.component';
@@ -43,6 +43,9 @@ import { PessoaService } from './components/cadastrar-pessoa/PessoaService';
 import { BuscarCepService } from './services/buscar.cep.service';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { DefaultLoginLayoutComponent } from './components/login/share/default-login-layout/default-login-layout/default-login-layout.component';
+import { PrimaryInputComponent } from './components/login/share/primary-input/primary-input/primary-input.component';
+import { UserComponent } from './components/login/pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
     CadastrarPessoaComponent,
     ClienteComponent,
     FuncionarioComponent,
-    CadastrarEnderecoComponent
+    CadastrarEnderecoComponent,
+   
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -82,7 +88,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule, // Compatível com o MatDatepicker
-    MatCheckboxModule
+    MatCheckboxModule,
+    DefaultLoginLayoutComponent,
+    PrimaryInputComponent,
+    UserComponent,
   ],
   providers: [
     PessoaService,
