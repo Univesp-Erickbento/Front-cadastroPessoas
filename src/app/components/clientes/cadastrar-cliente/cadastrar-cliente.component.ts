@@ -12,11 +12,13 @@ import { MatFormField } from '@angular/material/form-field';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-clientes',
-  templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  selector: 'app-cadastrar-cliente',
+  templateUrl: './cadastrar-cliente.component.html',
+  styleUrls: ['./cadastrar-cliente.component.css']
 })
-export class ClienteComponent implements OnInit, AfterViewInit {
+
+export class CadastrarClienteComponent implements OnInit, AfterViewInit {
+
   clienteForm!: FormGroup;
   nome: string | null = null;
   cpf: string | null = null;

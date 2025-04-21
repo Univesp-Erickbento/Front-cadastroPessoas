@@ -34,7 +34,7 @@ import { RegistrarComponent } from './components/login/pages/registrar/registrar
 import { LoginComponent } from './components/login/pages/entrar/login.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
-import { ClienteComponent } from './components/clientes/clientes.component';
+import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
 import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 
@@ -58,7 +58,7 @@ import { UserComponent } from './components/login/pages/user/user.component';
     LoginComponent,
     SettingsComponent,
     CadastrarPessoaComponent,
-    ClienteComponent,
+    CadastrarClienteComponent,
     FuncionarioComponent,
     CadastrarEnderecoComponent,
    

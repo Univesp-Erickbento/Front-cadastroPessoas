@@ -30,7 +30,7 @@ export class CadastrarPessoaComponent {
       cpf: ['', [Validators.required]],
       rg: ['', [Validators.required]],
       genero: ['', Validators.required],
-      nascimento: ['', Validators.required]
+      dataNascimento: ['', Validators.required]
     });
   }
 

@@ -54,8 +54,8 @@
     <!-- Data de Nascimento -->
     <mat-form-field appearance="outline">
       <mat-label>Data de Nascimento</mat-label>
-      <input matInput formControlName="nascimento" type="date" />
-      <mat-error *ngIf="pessoaForm.get('nascimento')?.invalid && pessoaForm.get('nascimento')?.touched">
+      <input matInput formControlName="dataNascimento" type="date" />
+      <mat-error *ngIf="pessoaForm.get('dataNascimento')?.invalid && pessoaForm.get('dataNascimento')?.touched">
         Data inválida
       </mat-error>
     </mat-form-field>

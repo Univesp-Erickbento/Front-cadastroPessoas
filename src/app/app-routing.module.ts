@@ -9,7 +9,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginComponent } from './components/login/pages/entrar/login.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
-import { ClienteComponent } from './components/clientes/clientes.component';
+import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
 import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 
@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent}, // Cadastrar Pessoa
-      { path: 'clientes', component: ClienteComponent},
+      { path: 'clientes', component: CadastrarClienteComponent},
       { path: 'funcionarios', component: FuncionarioComponent},
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
     ]
