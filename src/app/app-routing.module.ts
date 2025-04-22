@@ -12,6 +12,7 @@ import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastra
 import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
 import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
+import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent}, // Cadastrar Pessoa
       { path: 'clientes', component: CadastrarClienteComponent},
+      { path: 'visualizar-cliente/:id', component: VisualizarClienteComponent },
       { path: 'funcionarios', component: FuncionarioComponent},
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
     ]

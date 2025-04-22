@@ -46,6 +46,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { DefaultLoginLayoutComponent } from './components/login/share/default-login-layout/default-login-layout/default-login-layout.component';
 import { PrimaryInputComponent } from './components/login/share/primary-input/primary-input/primary-input.component';
 import { UserComponent } from './components/login/pages/user/user.component';
+import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { UserComponent } from './components/login/pages/user/user.component';
     CadastrarClienteComponent,
     FuncionarioComponent,
     CadastrarEnderecoComponent,
+    VisualizarClienteComponent,
    
     
     
