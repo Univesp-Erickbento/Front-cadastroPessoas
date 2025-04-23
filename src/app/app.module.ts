@@ -35,7 +35,7 @@ import { LoginComponent } from './components/login/pages/entrar/login.component'
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
-import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
+import { CadastrarFuncionarioComponent } from './components/funcionarios/cadastrar-funcionario/cadastrar-funcionario.component';
 import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 
 // Serviços
@@ -47,6 +47,7 @@ import { DefaultLoginLayoutComponent } from './components/login/share/default-lo
 import { PrimaryInputComponent } from './components/login/share/primary-input/primary-input/primary-input.component';
 import { UserComponent } from './components/login/pages/user/user.component';
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
+import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
 
 @NgModule({
   declarations: [
@@ -60,9 +61,10 @@ import { VisualizarClienteComponent } from './components/clientes/visualizar-cli
     SettingsComponent,
     CadastrarPessoaComponent,
     CadastrarClienteComponent,
-    FuncionarioComponent,
+    CadastrarFuncionarioComponent,
     CadastrarEnderecoComponent,
     VisualizarClienteComponent,
+    VisualizarFuncionarioComponent,
    
     
     

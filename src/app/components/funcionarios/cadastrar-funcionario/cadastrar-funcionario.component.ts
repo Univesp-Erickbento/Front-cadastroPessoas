@@ -5,11 +5,12 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-funcionarios',
-  templateUrl: './funcionarios.component.html',
-  styleUrls: ['./funcionarios.component.css']
+  selector: 'app-cadastrar-funcionario',
+  templateUrl: './cadastrar-funcionario.component.html',
+  styleUrls: ['./cadastrar-funcionario.component.css']
 })
-export class FuncionarioComponent implements OnInit {
+
+export class CadastrarFuncionarioComponent implements OnInit {
   funcionarioForm!: FormGroup;
   nome: string | null = null;
   cpf: string | null = null;

@@ -10,9 +10,10 @@ import { LoginComponent } from './components/login/pages/entrar/login.component'
 import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
-import { FuncionarioComponent } from './components/funcionarios/funcionarios.component';
+import { CadastrarFuncionarioComponent } from './components/funcionarios/cadastrar-funcionario/cadastrar-funcionario.component';
 import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
+import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
       { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent}, // Cadastrar Pessoa
       { path: 'clientes', component: CadastrarClienteComponent},
       { path: 'visualizar-cliente', component: VisualizarClienteComponent },
-      { path: 'funcionarios', component: FuncionarioComponent},
+      { path: 'funcionarios', component: CadastrarFuncionarioComponent},
+      { path: 'visualizar-funcionario', component: VisualizarFuncionarioComponent },
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
     ]
   },
