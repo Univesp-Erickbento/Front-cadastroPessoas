@@ -26,7 +26,7 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'cadastrar-pessoa', component: CadastrarPessoaComponent}, // Cadastrar Pessoa
       { path: 'clientes', component: CadastrarClienteComponent},
-      { path: 'visualizar-cliente/:id', component: VisualizarClienteComponent },
+      { path: 'visualizar-cliente', component: VisualizarClienteComponent },
       { path: 'funcionarios', component: FuncionarioComponent},
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
     ]
