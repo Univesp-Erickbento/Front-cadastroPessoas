@@ -1,36 +1,55 @@
-<div class="button-grid">
-  <!-- Botão para Cadastrar Funcionário, passando 'destino' como 'funcionario' -->
-  <button class="action-button" 
-          [routerLink]="['/cadastrar-pessoa']" 
-          [queryParams]="{ destino: 'funcionario' }">
-    Cadastrar Funcionário
-  </button>
+<div class="button-groups-container">
+  <!-- Grupo: Clientes -->
+  <div class="button-group">
+    <button class="action-button"
+            [routerLink]="['/cadastrar-pessoa']"
+            [queryParams]="{ destino: 'cliente' }">
+      Cadastrar Cliente
+    </button>
+    <button class="action-button"
+            [routerLink]="['/visualizar-cliente']">
+      Visualizar Cliente
+    </button>
+  </div>
 
-  <!-- Botão para Cadastrar Cliente, passando 'destino' como 'cliente' -->
-  <button class="action-button" 
-          [routerLink]="['/cadastrar-pessoa']" 
-          [queryParams]="{ destino: 'cliente' }">
-    Cadastrar Cliente
-  </button>
+  <!-- Grupo: Funcionários -->
+  <div class="button-group">
+    <button class="action-button"
+            [routerLink]="['/cadastrar-pessoa']"
+            [queryParams]="{ destino: 'funcionario' }">
+      Cadastrar Funcionário
+    </button>
+    <button class="action-button"
+            [routerLink]="['/visualizar-funcionario']">
+      Visualizar Funcionário
+    </button>
+  </div>
 
-  <!-- Outros botões podem continuar os mesmos -->
-  <button class="action-button" [routerLink]="'/settings'">
-    Cadastrar Estabelecimento
-  </button>
+  <!-- Grupo: Endereços -->
+  <div class="button-group">
+    <button class="action-button"
+            [routerLink]="['/cadastrar-endereco']">
+      Cadastrar Endereço
+    </button>
+    <button class="action-button"
+            [routerLink]="['/visualizar-endereco']">
+      Visualizar Endereço
+    </button>
+  </div>
 
-  <button class="action-button" [routerLink]="'/funcionarios'">
-    Pesquisar Funcionário
-  </button>
-
-  <button class="action-button" [routerLink]="'/settings'">
-    Pesquisar Estabelecimento
-  </button>
-
-  <button class="action-button" [routerLink]="'/settings'">
-    Fazer Agendamento
-  </button>
-
-  <button class="action-button" [routerLink]="'/settings'">
-    Cadastrar Tipo de Serviço
-  </button>
+  <!-- Grupo: Estabelecimento / Outros -->
+  <div class="button-group">
+    <button class="action-button" [routerLink]="'/settings'">
+      Cadastrar Estabelecimento
+    </button>
+    <button class="action-button" [routerLink]="'/settings'">
+      Pesquisar Estabelecimento
+    </button>
+    <button class="action-button" [routerLink]="'/settings'">
+      Fazer Agendamento
+    </button>
+    <button class="action-button" [routerLink]="'/settings'">
+      Cadastrar Tipo de Serviço
+    </button>
+  </div>
 </div>

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
             // Redireciona para o dashboard ou rota salva anteriormente
             const redirectTo = this.authService.getRedirectUrl();
-            this.router.navigate([redirectTo || '/dashboard']);
+            this.router.navigate([redirectTo || '/menu']);
           } else {
             console.warn('⚠️ Token não encontrado na resposta.');
             alert('Login falhou: token não recebido.');
