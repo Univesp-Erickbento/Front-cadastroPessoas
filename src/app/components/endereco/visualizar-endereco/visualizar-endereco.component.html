@@ -1,0 +1,116 @@
+<div class="form-container">
+    <h2 class="title">Visualizar Endereços</h2>
+  
+    <form [formGroup]="enderecoForm">
+      <!-- Nome -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" readonly />
+      </mat-form-field>
+  
+      <!-- CPF, PessoaId e Botão -->
+      <div class="linha-pessoa">
+        <mat-form-field appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input
+            matInput
+            formControlName="cpf"
+            maxlength="14"
+            placeholder="000.000.000-00"
+            (input)="formatarCpf($event)"
+          />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>PessoaId</mat-label>
+          <input matInput formControlName="pessoaId" readonly />
+        </mat-form-field>
+  
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          (click)="pesquisarPessoa()"
+          matTooltip="Pesquisar Pessoa"
+          class="btn-pesquisar"
+        >
+          Pesquisar Pessoa
+        </button>
+      </div>
+  
+      <!-- Tipo de Endereço -->
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Endereço</mat-label>
+        <mat-select
+          formControlName="tipoDeEndereco"
+          (selectionChange)="onTipoEnderecoChange()"
+        >
+          <mat-option *ngFor="let tipo of tiposDisponiveis" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <!-- Campos preenchidos automaticamente (readonly) -->
+  
+      <mat-form-field appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="cep" readonly />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Logradouro</mat-label>
+        <input matInput formControlName="logradouro" readonly />
+      </mat-form-field>
+  
+      <div class="form-group-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Complemento</mat-label>
+          <input matInput formControlName="complemento" readonly />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Número</mat-label>
+          <input matInput formControlName="numero" readonly />
+        </mat-form-field>
+      </div>
+  
+      <div class="form-group-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="bairro" readonly />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Localidade</mat-label>
+          <input matInput formControlName="localidade" readonly />
+        </mat-form-field>
+      </div>
+  
+      <div class="form-group-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="estado" readonly />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>País</mat-label>
+          <input matInput formControlName="pais" readonly />
+        </mat-form-field>
+      </div>
+  
+      <!-- Botão Voltar -->
+      <div class="button-container">
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="navegarParaLista()"
+          class="action-btn"
+        >
+          Voltar
+        </button>
+      </div>
+    </form>
+  </div>
+  

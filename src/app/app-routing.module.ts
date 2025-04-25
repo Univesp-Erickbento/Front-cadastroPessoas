@@ -11,10 +11,10 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { CadastrarFuncionarioComponent } from './components/funcionarios/cadastrar-funcionario/cadastrar-funcionario.component';
-import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
+import { CadastrarEnderecoComponent } from './components/endereco/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
-
+import { VisualizarEnderecoComponent } from './components/endereco/visualizar-endereco/visualizar-endereco.component';
 const routes: Routes = [
   {
     path: '', component: NavComponent, children: [
@@ -31,6 +31,7 @@ const routes: Routes = [
       { path: 'funcionarios', component: CadastrarFuncionarioComponent},
       { path: 'visualizar-funcionario', component: VisualizarFuncionarioComponent },
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
+      { path: 'visualizar-endereco', component: VisualizarEnderecoComponent },
     ]
   },
   { path: '**', redirectTo: '' } // Redireciona rotas inválidas para a raiz

@@ -19,7 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatNativeDateModule } from '@angular/material/core'; // Necessário para Datepicker
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core'; // Necessário para Datepicker
 
 // Rotas
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +36,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastrar-pessoa.component';
 import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { CadastrarFuncionarioComponent } from './components/funcionarios/cadastrar-funcionario/cadastrar-funcionario.component';
-import { CadastrarEnderecoComponent } from './components/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
+import { CadastrarEnderecoComponent } from './components/endereco/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
 
 // Serviços
 import { PessoaService } from './components/cadastrar-pessoa/PessoaService';
@@ -48,6 +48,8 @@ import { PrimaryInputComponent } from './components/login/share/primary-input/pr
 import { UserComponent } from './components/login/pages/user/user.component';
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
+import { VisualizarEnderecoComponent } from './components/endereco/visualizar-endereco/visualizar-endereco.component';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { VisualizarFuncionarioComponent } from './components/funcionarios/visual
     CadastrarEnderecoComponent,
     VisualizarClienteComponent,
     VisualizarFuncionarioComponent,
+    VisualizarEnderecoComponent,
    
     
     
@@ -96,6 +99,7 @@ import { VisualizarFuncionarioComponent } from './components/funcionarios/visual
     DefaultLoginLayoutComponent,
     PrimaryInputComponent,
     UserComponent,
+    MatOptionModule
   ],
   providers: [
     PessoaService,
