@@ -49,6 +49,8 @@ import { UserComponent } from './components/login/pages/user/user.component';
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
 import { VisualizarEnderecoComponent } from './components/endereco/visualizar-endereco/visualizar-endereco.component';
+import { DecoracaoDetalhesComponent } from './components/decoracao/itens/decoracao-detalhes/decoracao-detalhes.component';
+import { ListaProdutosComponent } from './decoracao/itens/lista-produtos/lista-produtos.component';
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import { VisualizarEnderecoComponent } from './components/endereco/visualizar-en
     VisualizarClienteComponent,
     VisualizarFuncionarioComponent,
     VisualizarEnderecoComponent,
+    DecoracaoDetalhesComponent,
+    ListaProdutosComponent,
    
     
     

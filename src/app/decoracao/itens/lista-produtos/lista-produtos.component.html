@@ -1,0 +1,7 @@
+<div class="produto-lista">
+    <div *ngFor="let produto of produtos" class="produto-item">
+      <img [src]="getImagemUrl(produto.fotoPrincipalUrl)" alt="{{produto.nome}}" (click)="onImageClick(produto.id)">
+      <p>{{produto.nome}}</p>
+    </div>
+  </div>
+  

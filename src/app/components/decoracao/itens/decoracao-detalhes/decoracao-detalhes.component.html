@@ -1,0 +1,26 @@
+<div class="detalhes-container" *ngIf="item">
+    <!-- Botão de voltar -->
+    <button (click)="onBackClick()" class="btn-voltar">← Voltar</button>
+  
+    <!-- Nome do Produto -->
+    <h1 class="titulo">{{ item.nome }}</h1>
+  
+    <!-- Bloco principal com imagem e detalhes -->
+    <div class="detalhes-layout">
+      <!-- Imagem -->
+      <img 
+        [src]="getImagemUrl(item.fotoPrincipalUrl)" 
+        alt="Imagem de {{ item.nome }}" 
+        (error)="onImageError($event)"
+        class="imagem-produto"
+      />
+  
+      <!-- Informações -->
+      <div class="detalhes-info">
+        <p>{{ item.descricao }}</p>
+        <h3>Preço: <span class="preco">R$ {{ item.preco }}</span></h3>
+        <p><strong>Método de pagamento:</strong> {{ item.metodoPagamento }}</p>
+      </div>
+    </div>
+  </div>
+  

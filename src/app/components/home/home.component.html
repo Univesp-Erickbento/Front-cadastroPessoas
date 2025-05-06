@@ -1,36 +1,20 @@
-<div class="button-grid">
-  <!-- Botão para Cadastrar Funcionário, passando 'destino' como 'funcionario' -->
-  <button class="action-button" 
-          [routerLink]="['/cadastrar-pessoa']" 
-          [queryParams]="{ destino: 'funcionario' }">
-    Cadastrar Funcionário
-  </button>
+<div class="home-container">
+  <h1 class="titulo">Redecorações</h1>
 
-  <!-- Botão para Cadastrar Cliente, passando 'destino' como 'cliente' -->
-  <button class="action-button" 
-          [routerLink]="['/cadastrar-pessoa']" 
-          [queryParams]="{ destino: 'cliente' }">
-    Cadastrar Cliente
-  </button>
-
-  <!-- Outros botões podem continuar os mesmos -->
-  <button class="action-button" [routerLink]="'/settings'">
-    Cadastrar Estabelecimento
-  </button>
-
-  <button class="action-button" [routerLink]="'/funcionarios'">
-    Pesquisar Funcionário
-  </button>
-
-  <button class="action-button" [routerLink]="'/settings'">
-    Pesquisar Estabelecimento
-  </button>
-
-  <button class="action-button" [routerLink]="'/settings'">
-    Fazer Agendamento
-  </button>
-
-  <button class="action-button" [routerLink]="'/settings'">
-    Cadastrar Tipo de Serviço
-  </button>
+  <div class="decoracoes-grid">
+    <div 
+      class="decoracao-card" 
+      *ngFor="let item of decoracoes" 
+      (click)="verDetalhes(item.id)"
+      style="cursor: pointer; border: 1px solid #ccc; padding: 10px; border-radius: 8px;"
+    >
+      <img 
+        [src]="item.imagemUrl" 
+        alt="Imagem de {{item.nome}}" 
+        (error)="item.imagemUrl = 'https://via.placeholder.com/300x200?text=Imagem+Indisponível'"
+        style="width: 100%; max-width: 300px; height: auto; border-radius: 5px;"
+      />
+      <h2>{{ item.nome }}</h2>
+    </div>
+  </div>
 </div>

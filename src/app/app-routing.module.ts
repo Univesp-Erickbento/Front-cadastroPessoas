@@ -15,6 +15,8 @@ import { CadastrarEnderecoComponent } from './components/endereco/cadastrar-ende
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
 import { VisualizarEnderecoComponent } from './components/endereco/visualizar-endereco/visualizar-endereco.component';
+import { DecoracaoDetalhesComponent } from './components/decoracao/itens/decoracao-detalhes/decoracao-detalhes.component';
+import { ListaProdutosComponent } from './decoracao/itens/lista-produtos/lista-produtos.component';
 const routes: Routes = [
   {
     path: '', component: NavComponent, children: [
@@ -32,6 +34,11 @@ const routes: Routes = [
       { path: 'visualizar-funcionario', component: VisualizarFuncionarioComponent },
       { path: 'cadastrar-endereco', component: CadastrarEnderecoComponent },
       { path: 'visualizar-endereco', component: VisualizarEnderecoComponent },
+      { path: 'detalhes-decoracao/:id', component: DecoracaoDetalhesComponent },
+      { path: 'produtos', component: ListaProdutosComponent },
+      { path: 'produto/:id', component: DecoracaoDetalhesComponent },
+      { path: '', redirectTo: '/produtos', pathMatch: 'full' }
+
     ]
   },
   { path: '**', redirectTo: '' } // Redireciona rotas inválidas para a raiz
