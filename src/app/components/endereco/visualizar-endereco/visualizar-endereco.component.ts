@@ -56,7 +56,7 @@ export class VisualizarEnderecoComponent implements OnInit {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
     // Modificado para utilizar o novo endpoint
-    this.http.get<any>(`http://localhost:7080/api/enderecos/por-tipo?cpf=${cpf}`, { headers }).subscribe({
+    this.http.get<any>(`http://localhost:9093/api/enderecos/por-tipo?cpf=${cpf}`, { headers }).subscribe({
       next: response => {
         if (!response || !response.enderecosPorTipo) {
           alert('Endereços não encontrados.');

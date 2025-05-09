@@ -45,7 +45,7 @@ export class VisualizarClienteComponent implements OnInit {
       Authorization: `Bearer ${token}`
     });
 
-    this.http.get<any>(`http://localhost:8080/api/clientes/${id}`, { headers })
+    this.http.get<any>(`http://localhost:9091/api/clientes/${id}`, { headers })
       .subscribe({
         next: (cliente) => {
           this.clienteForm.patchValue({
@@ -104,8 +104,8 @@ pesquisarPessoa(): void {
         });
 
         // 🔹 Agora busca dados do cliente associado
-        // Corrigindo o endpoint para o serviço correto (porta 8080)
-        this.http.get<any>(`http://localhost:8080/api/clientes/pessoa/${pessoaId}`, { headers })
+        // Corrigindo o endpoint para o serviço correto (porta 9091)
+        this.http.get<any>(`http://localhost:9091/api/clientes/pessoa/${pessoaId}`, { headers })
           .subscribe({
             next: (cliente) => {
               // Se o cliente for encontrado, preenche os dados

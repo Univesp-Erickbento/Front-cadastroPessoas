@@ -112,7 +112,7 @@ export class CadastrarClienteComponent implements OnInit, AfterViewInit {
         'Authorization': `Bearer ${token}`
       });
 
-      this.http.post('http://localhost:8080/api/clientes/adicionar', clienteDTO, { headers })
+      this.http.post('http://localhost:9091/api/clientes/adicionar', clienteDTO, { headers })
         .subscribe({
           next: () => {
             alert('✅ Cliente cadastrado com sucesso!');

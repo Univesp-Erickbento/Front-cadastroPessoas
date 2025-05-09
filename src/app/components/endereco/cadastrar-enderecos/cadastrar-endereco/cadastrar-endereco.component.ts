@@ -75,7 +75,7 @@ export class CadastrarEnderecoComponent implements OnInit {
       }
 
       this.http.post(
-        'http://localhost:7080/api/enderecos/salvar-endereco',
+        'http://localhost:9093/api/enderecos/salvar-endereco',
         enderecoDTO,
         {
           headers: {

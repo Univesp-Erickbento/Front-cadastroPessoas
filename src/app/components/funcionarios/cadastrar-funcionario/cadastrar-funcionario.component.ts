@@ -95,7 +95,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
       });
 
       this.http.post<HttpResponse<any>>(
-        'http://localhost:8080/api/funcionarios/adicionar',
+        'http://localhost:9091/api/funcionarios/adicionar',
         funcionarioDTO,
         { headers, observe: 'response' }
       ).subscribe({

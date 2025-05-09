@@ -53,7 +53,7 @@ export class VisualizarFuncionarioComponent implements OnInit {
       Authorization: `Bearer ${token}`
     });
 
-    this.http.get<any>(`http://localhost:8080/api/funcionarios/${id}`, { headers })
+    this.http.get<any>(`http://localhost:9091/api/funcionarios/${id}`, { headers })
       .subscribe({
         next: (funcionario) => {
           this.funcionarioForm.patchValue({
@@ -99,7 +99,7 @@ export class VisualizarFuncionarioComponent implements OnInit {
           });
 
           // Buscar funcionário relacionado à pessoa
-          this.http.get<any>(`http://localhost:8080/api/funcionarios/pessoa/${pessoaId}`, { headers })
+          this.http.get<any>(`http://localhost:9091/api/funcionarios/pessoa/${pessoaId}`, { headers })
             .subscribe({
               next: (funcionario) => {
                 this.funcionarioForm.patchValue({
