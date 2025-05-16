@@ -1,28 +1,30 @@
-# Angularproject
+# Cadastro de Pessoas - Frontend Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+Este é um projeto frontend desenvolvido com **Angular 16** e **Angular Material**, que permite o **cadastro e consulta de pessoas** com seus respectivos **endereços**. O sistema permite registrar pessoas como **Funcionário** ou **Cliente**, além de gerenciar múltiplos endereços classificados por tipo: **Residencial** ou **Comercial**.
 
-## Development server
+## 📋 Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Cadastro de pessoas com dados básicos
+- Classificação de pessoa como:
+  - Funcionário
+  - Cliente
+- Cadastro de múltiplos endereços por pessoa
+  - Tipos de endereço: Residencial ou Comercial
+- Consulta de pessoas cadastradas com visualização dos endereços
+- Interface responsiva e moderna utilizando Angular Material
 
-## Code scaffolding
+## 🛠️ Tecnologias Utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Angular 16](https://angular.io/)
+- [Angular Material](https://material.angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [RxJS](https://rxjs.dev/)
+- [SCSS](https://sass-lang.com/)
+- [Node.js](https://nodejs.org/) (para ambiente de desenvolvimento)
 
-## Build
+## 📦 Instalação
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone o repositório:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# Front-cadastroPessoas
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
