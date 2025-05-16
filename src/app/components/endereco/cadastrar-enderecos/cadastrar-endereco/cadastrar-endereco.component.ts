@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BuscarCepService } from '../../../../services/buscar.cep.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-cadastrar-endereco',
@@ -75,7 +76,7 @@ export class CadastrarEnderecoComponent implements OnInit {
       }
 
       this.http.post(
-        'http://localhost:9093/api/enderecos/salvar-endereco',
+        `${environment.apiUrl}/salvar-endereco`, // Usando o endpoint da variável de ambiente
         enderecoDTO,
         {
           headers: {
@@ -120,7 +121,7 @@ export class CadastrarEnderecoComponent implements OnInit {
       return;
     }
 
-    this.http.get<any>(`http://192.168.15.200:9090/api/pessoas/cpf/${cpf}`, {
+    this.http.get<any>(`${environment.apiUrl}/cpf/${cpf}`, { // Usando o endpoint para pessoas da variável de ambiente
       headers: { 'Authorization': `Bearer ${token}` }
     }).subscribe(
       response => {

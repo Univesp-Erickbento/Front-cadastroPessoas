@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://192.168.15.200:9090/auth/login';
-  private registerUrl = 'http://192.168.15.200:9090/auth/register';
+  private loginUrl = `${environment.AUTH_API}/auth/login`;
+  private registerUrl = `${environment.AUTH_API}/auth/register`;
 
   constructor(private http: HttpClient) {}
 
   // Login com nomeUsuario e senha
   login(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
-    // Remover o token expirado ou qualquer token armazenado no localStorage antes do login
     localStorage.removeItem('authToken');
 
     const loginRequest = {
@@ -38,22 +38,18 @@ export class AuthService {
     });
   }
 
-  // Salvar token JWT
   salvarToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  // Recuperar o token JWT
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  // Realizar logout e remover o token
   logout(): void {
     localStorage.removeItem('authToken');
   }
 
-  // Redirecionamento após login
   setRedirectUrl(url: string): void {
     localStorage.setItem('redirectUrl', url);
   }

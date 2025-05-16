@@ -39,6 +39,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "defaultConfiguration": "development",  // Alterado para 'development'
           "options": {
             "baseHref": "/",
             "outputPath": "dist/angularproject",
@@ -60,6 +61,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -72,9 +79,11 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true
             },
             "development": {
+              "fileReplacements": [],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -82,11 +91,11 @@
               "sourceMap": true,
               "namedChunks": true
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "defaultConfiguration": "development",  // Alterado para 'development'
           "options": {
             "proxyConfig": "./proxy.conf.json",
             "host": "0.0.0.0"
@@ -98,8 +107,7 @@
             "development": {
               "browserTarget": "angularproject:build:development"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
