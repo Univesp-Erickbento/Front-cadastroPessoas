@@ -1,6 +1,6 @@
 {
   "/auth": {
-    "target": "http://45.33.100.30:9090",
+    "target": "http://45.93.100.30:9090",
     "secure": false
   },
   "/api": {

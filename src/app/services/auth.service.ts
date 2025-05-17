@@ -7,12 +7,11 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = `${environment.AUTH_API}/auth/login`;
-  private registerUrl = `${environment.AUTH_API}/auth/register`;
+  private loginUrl = `${environment.AUTH_API}/login`;
+  private registerUrl = `${environment.AUTH_API}/register`;
 
   constructor(private http: HttpClient) {}
 
-  // Login com nomeUsuario e senha
   login(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
     localStorage.removeItem('authToken');
 
@@ -26,7 +25,6 @@ export class AuthService {
     });
   }
 
-  // Registro de novo usuário
   register(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
     const registerRequest = {
       nomeUsuario: credentials.nomeUsuario,

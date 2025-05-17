@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class PessoaService {
-  private baseUrl = environment.apiUrl;
+  private baseUrl = environment.apiUrl; // Certifique-se de que isso termina com /api
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -24,31 +24,37 @@ export class PessoaService {
   }
 
   cadastrarPessoa(pessoa: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/pessoa/adicionar`, pessoa, {
+    return this.http.post<any>(`${this.baseUrl}/api/pessoas/adicionar`, pessoa, {
       headers: this.getAuthHeaders()
     });
   }
 
   listarTodas(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/pessoa`, { headers: this.getAuthHeaders() });
+    return this.http.get<any>(`${this.baseUrl}/api/pessoas`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   buscarPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/pessoa/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.get<any>(`${this.baseUrl}/api/pessoas/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   buscarPorCpf(cpf: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/pessoa/cpf/${cpf}`, { headers: this.getAuthHeaders() });
+    return this.http.get<any>(`${this.baseUrl}/api/pessoas/cpf/${cpf}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   atualizarPessoa(id: number, pessoa: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/pessoa/${id}`, pessoa, {
+    return this.http.put<any>(`${this.baseUrl}/api/pessoas/${id}`, pessoa, {
       headers: this.getAuthHeaders()
     });
   }
 
   deletarPessoa(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/pessoa/${id}`, {
+    return this.http.delete<void>(`${this.baseUrl}/api/pessoas/${id}`, {
       headers: this.getAuthHeaders()
     });
   }
