@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
 
-  // Endpoint principal da API de pessoas (Spring Boot)
-  apiUrl: 'http://45.93.100.30:9090/api/pessoas',
+  // API hospedada no servidor remoto
+  apiUrl: 'http://45.93.100.30:9090/api',
 
-  // Endpoint de autenticação (login)
+  // Autenticação no servidor remoto
   AUTH_API: 'http://45.93.100.30:9090/auth',
 
-  // Endpoint geral se tiver outros módulos separados
+  // Endpoint principal remoto
   MAIN_API: 'http://45.93.100.30:9090'
 };

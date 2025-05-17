@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class PessoaService {
-  private baseUrl = environment.apiUrl; // Certifique-se de que isso termina com /api
+  private baseUrl = environment.apiUrl; // ex: http://...:9090/api
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -24,50 +24,50 @@ export class PessoaService {
   }
 
   cadastrarPessoa(pessoa: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/api/pessoas/adicionar`, pessoa, {
+    return this.http.post<any>(`${this.baseUrl}/pessoas/adicionar`, pessoa, {
       headers: this.getAuthHeaders()
     });
   }
 
   listarTodas(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/api/pessoas`, {
+    return this.http.get<any>(`${this.baseUrl}/pessoas`, {
       headers: this.getAuthHeaders()
     });
   }
 
   buscarPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/api/pessoas/${id}`, {
+    return this.http.get<any>(`${this.baseUrl}/pessoas/${id}`, {
       headers: this.getAuthHeaders()
     });
   }
 
   buscarPorCpf(cpf: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/api/pessoas/cpf/${cpf}`, {
+    return this.http.get<any>(`${this.baseUrl}/pessoas/cpf/${cpf}`, {
       headers: this.getAuthHeaders()
     });
   }
 
   atualizarPessoa(id: number, pessoa: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/api/pessoas/${id}`, pessoa, {
+    return this.http.put<any>(`${this.baseUrl}/pessoas/${id}`, pessoa, {
       headers: this.getAuthHeaders()
     });
   }
 
   deletarPessoa(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/api/pessoas/${id}`, {
+    return this.http.delete<void>(`${this.baseUrl}/pessoas/${id}`, {
       headers: this.getAuthHeaders()
     });
   }
 
-  salvarToken(token: string) {
+  salvarToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  getToken() {
+  getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('authToken');
   }
 }

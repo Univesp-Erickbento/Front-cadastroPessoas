@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
 
-  // IP da sua API principal (onde está o Spring Boot)
-  apiUrl: 'http://192.168.1.200:9090/api/pessoas',
+  // API local (Spring Boot rodando em máquina de desenvolvimento)
+  apiUrl: 'http://192.168.1.200:9090/api',
 
-  // Caso use autenticação separada
+  // Autenticação local
   AUTH_API: 'http://192.168.1.200:9090/auth',
 
-  // API principal, se quiser dividir entre módulos
+  // Endpoint principal caso tenha múltiplos módulos
   MAIN_API: 'http://192.168.1.200:9090'
 };
