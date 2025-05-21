@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment'; // ✅ Importação
 
 @Component({
   selector: 'app-visualizar-funcionario',
@@ -32,7 +33,6 @@ export class VisualizarFuncionarioComponent implements OnInit {
       dataDeAdmissao: ['']
     });
 
-    // Desabilita todos os campos exceto o CPF
     this.funcionarioForm.get('nome')?.disable();
     this.funcionarioForm.get('pessoaId')?.disable();
     this.funcionarioForm.get('funcionarioReg')?.disable();
@@ -53,7 +53,7 @@ export class VisualizarFuncionarioComponent implements OnInit {
       Authorization: `Bearer ${token}`
     });
 
-    this.http.get<any>(`http://localhost:9091/api/funcionarios/${id}`, { headers })
+    this.http.get<any>(`${environment.cadastroFuncionarioApi}/funcionarios/${id}`, { headers })
       .subscribe({
         next: (funcionario) => {
           this.funcionarioForm.patchValue({
@@ -86,7 +86,7 @@ export class VisualizarFuncionarioComponent implements OnInit {
       Authorization: `Bearer ${token}`
     });
 
-    this.http.get<any>(`http://localhost:9090/api/pessoas/cpf/${cpf}`, { headers })
+    this.http.get<any>(`${environment.cadastroPessoasApi}/pessoas/cpf/${cpf}`, { headers })
       .subscribe({
         next: (pessoa) => {
           const pessoaId = pessoa.id;
@@ -98,8 +98,7 @@ export class VisualizarFuncionarioComponent implements OnInit {
             pessoaId: pessoaId
           });
 
-          // Buscar funcionário relacionado à pessoa
-          this.http.get<any>(`http://localhost:9091/api/funcionarios/pessoa/${pessoaId}`, { headers })
+          this.http.get<any>(`${environment.cadastroFuncionarioApi}/funcionarios/pessoa/${pessoaId}`, { headers })
             .subscribe({
               next: (funcionario) => {
                 this.funcionarioForm.patchValue({

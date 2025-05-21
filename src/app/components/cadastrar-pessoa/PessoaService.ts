@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class PessoaService {
-  private baseUrl = environment.apiUrl; // ex: http://...:9090/api
+  private baseUrl = environment.cadastroPessoasApi; // Substituindo pelo URL de produção
 
   constructor(private http: HttpClient, private router: Router) {}
 

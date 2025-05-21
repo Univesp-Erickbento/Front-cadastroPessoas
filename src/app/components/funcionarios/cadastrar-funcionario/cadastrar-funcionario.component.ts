@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment'; // ✅ Importação do ambiente
 
 @Component({
   selector: 'app-cadastrar-funcionario',
   templateUrl: './cadastrar-funcionario.component.html',
   styleUrls: ['./cadastrar-funcionario.component.css']
 })
-
 export class CadastrarFuncionarioComponent implements OnInit {
   funcionarioForm!: FormGroup;
   nome: string | null = null;
@@ -94,8 +94,9 @@ export class CadastrarFuncionarioComponent implements OnInit {
         'Authorization': `Bearer ${token}`
       });
 
+      // ✅ Usa URL do environment
       this.http.post<HttpResponse<any>>(
-        'http://localhost:9091/api/funcionarios/adicionar',
+        `${environment.cadastroFuncionarioApi}/funcionarios/adicionar`,
         funcionarioDTO,
         { headers, observe: 'response' }
       ).subscribe({
@@ -114,7 +115,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
         },
         error: (err) => {
           console.error('Erro ao cadastrar funcionário:', err);
-          const message = err.error?.message || 'Erro ao cadastrar funcionário.';
+          const message = err.error?.mensagem || 'Erro ao cadastrar funcionário.';
           alert(message);
         }
       });
@@ -143,7 +144,8 @@ export class CadastrarFuncionarioComponent implements OnInit {
         'Authorization': `Bearer ${token}`
       });
 
-      this.http.get(`http://localhost:9090/api/pessoas/cpf/${cpfPesquisado}`, { headers })
+      // ✅ Usa URL do environment
+      this.http.get(`${environment.cadastroPessoasApi}/pessoas/cpf/${cpfPesquisado}`, { headers })
         .subscribe(
           (response: any) => {
             if (response && response.nome && response.id) {

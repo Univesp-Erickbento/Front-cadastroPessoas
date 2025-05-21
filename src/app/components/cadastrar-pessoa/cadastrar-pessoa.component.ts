@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PessoaService } from './PessoaService';
 import { AuthService } from '../../services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -34,6 +35,7 @@ export class CadastrarPessoaComponent {
     });
   }
 
+  // Formatação do CPF
   formatarCpf(event: any) {
     let cpf = event.target.value.replace(/\D/g, '');
     if (cpf.length > 11) cpf = cpf.substring(0, 11);
@@ -51,6 +53,7 @@ export class CadastrarPessoaComponent {
     this.pessoaForm.get('cpf')?.setValue(cpf, { emitEvent: false });
   }
 
+  // Formatação do RG
   formatarRg(event: any) {
     let rg = event.target.value.replace(/\D/g, '');
     if (rg.length > 9) rg = rg.substring(0, 9);
@@ -67,8 +70,8 @@ export class CadastrarPessoaComponent {
   
     this.pessoaForm.get('rg')?.setValue(rg, { emitEvent: false });
   }
-  
 
+  // Submissão do Formulário
   proximo() {
     if (this.pessoaForm.valid) {
       const pessoaDados = { ...this.pessoaForm.value };
@@ -77,6 +80,7 @@ export class CadastrarPessoaComponent {
       pessoaDados.cpf = pessoaDados.cpf.replace(/\D/g, '');
       pessoaDados.rg = pessoaDados.rg.replace(/\D/g, '');
 
+      // Recuperando o token de autenticação
       const token = this.authService.getToken();
       if (!token) {
         alert('Você precisa estar logado para realizar o cadastro!');
@@ -84,6 +88,7 @@ export class CadastrarPessoaComponent {
         return;
       }
 
+      // Chamando o serviço para cadastrar a pessoa
       this.pessoaService.cadastrarPessoa(pessoaDados).subscribe(
         response => {
           alert('Cadastro realizado com sucesso!');
@@ -94,6 +99,7 @@ export class CadastrarPessoaComponent {
             pessoaId: response.id
           };
 
+          // Redirecionando conforme o destino
           if (this.destino === 'funcionario') {
             this.router.navigate(['/funcionarios'], { queryParams });
           } else if (this.destino === 'cliente') {

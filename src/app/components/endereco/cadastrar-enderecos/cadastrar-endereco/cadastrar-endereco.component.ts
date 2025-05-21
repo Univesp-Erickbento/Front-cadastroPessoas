@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BuscarCepService } from '../../../../services/buscar.cep.service';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../../environments/environment'; // Importando as variáveis de ambiente
 
 @Component({
   selector: 'app-cadastrar-endereco',
@@ -75,8 +75,9 @@ export class CadastrarEnderecoComponent implements OnInit {
         return;
       }
 
+      // Usando o endpoint da variável de ambiente para salvar o endereço
       this.http.post(
-        `${environment.apiUrl}/salvar-endereco`, // Usando o endpoint da variável de ambiente
+        `${environment.cadastroEnderecoApi}/salvar-endereco`,  // Usando o endpoint da variável de ambiente
         enderecoDTO,
         {
           headers: {
@@ -121,7 +122,8 @@ export class CadastrarEnderecoComponent implements OnInit {
       return;
     }
 
-    this.http.get<any>(`${environment.apiUrl}/cpf/${cpf}`, { // Usando o endpoint para pessoas da variável de ambiente
+    // Usando o endpoint da variável de ambiente para buscar a pessoa
+    this.http.get<any>(`${environment.cadastroPessoasApi}/cpf/${cpf}`, {  // Usando a variável de ambiente
       headers: { 'Authorization': `Bearer ${token}` }
     }).subscribe(
       response => {
@@ -153,6 +155,7 @@ export class CadastrarEnderecoComponent implements OnInit {
         return;
       }
 
+      // Usando o serviço de buscar CEP
       this.buscarCepService.buscarCep(cepFormatado).subscribe((dados) => {
         if (dados && !dados.erro) {
           this.enderecoForm.patchValue({

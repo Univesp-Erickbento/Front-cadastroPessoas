@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router'; // Importação do Router
 
+import { environment } from '../../../../environments/environment'; // Importando as variáveis de ambiente
+
 @Component({
   selector: 'app-visualizar-endereco',
   templateUrl: './visualizar-endereco.component.html',
@@ -55,8 +57,8 @@ export class VisualizarEnderecoComponent implements OnInit {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-    // Modificado para utilizar o novo endpoint
-    this.http.get<any>(`http://localhost:9093/api/enderecos/por-tipo?cpf=${cpf}`, { headers }).subscribe({
+    // Alterado para usar a chave consultaEnderecoApi do arquivo environment.ts
+    this.http.get<any>(`${environment.consultaEnderecoApi}/enderecos/por-tipo?cpf=${cpf}`, { headers }).subscribe({
       next: response => {
         if (!response || !response.enderecosPorTipo) {
           alert('Endereços não encontrados.');

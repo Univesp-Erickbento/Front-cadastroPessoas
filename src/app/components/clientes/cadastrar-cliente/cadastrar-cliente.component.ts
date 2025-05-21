@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatFormField } from '@angular/material/form-field';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';  // Importando o ambiente
 
 @Component({
   selector: 'app-cadastrar-cliente',
@@ -46,9 +47,9 @@ export class CadastrarClienteComponent implements OnInit, AfterViewInit {
     this.clienteForm = this.fb.group({
       id: [{ value: this.gerarId(), disabled: true }],
       nome: [{ value: this.nome, disabled: true }],
-      cpf: [this.cpf || '', Validators.required],
+      cpf: [this.cpf || '', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],  // CPF com validação de formato
       pessoaId: [this.pessoaId || ''],
-      clienteReg: ['', Validators.required],  // Ajustado para clienteReg
+      clienteReg: ['', Validators.required],
       clienteStatus: ['', Validators.required]
     });
 
@@ -69,22 +70,15 @@ export class CadastrarClienteComponent implements OnInit, AfterViewInit {
 
   formatarCpf(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let cpf = input.value.replace(/\D/g, '');
-
+    let cpf = input.value.replace(/\D/g, '');  // Remove não numéricos
+  
+    // Aplica máscara ao CPF
     if (cpf.length > 11) cpf = cpf.substring(0, 11);
-
-    if (cpf.length <= 3) {
-      cpf = cpf;
-    } else if (cpf.length <= 6) {
-      cpf = cpf.replace(/(\d{3})(\d+)/, '$1.$2');
-    } else if (cpf.length <= 9) {
-      cpf = cpf.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
-    } else {
-      cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-    }
-
+    cpf = cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2})$/, '$1.$2.$3-$4');
+  
     this.clienteForm.get('cpf')?.setValue(cpf);
   }
+  
 
   onSubmit(): void {
     const token = this.authService.getToken();
@@ -112,7 +106,7 @@ export class CadastrarClienteComponent implements OnInit, AfterViewInit {
         'Authorization': `Bearer ${token}`
       });
 
-      this.http.post('http://localhost:9091/api/clientes/adicionar', clienteDTO, { headers })
+      this.http.post(environment.cadastroClienteApi + '/clientes/adicionar', clienteDTO, { headers })
         .subscribe({
           next: () => {
             alert('✅ Cliente cadastrado com sucesso!');
@@ -120,9 +114,10 @@ export class CadastrarClienteComponent implements OnInit, AfterViewInit {
             this.router.navigate(['/cadastrar-endereco'], {
               queryParams: {
                 pessoaId: formRaw.pessoaId,
-                cpf: formRaw.cpf.replace(/\D/g, '') // Se precisar passar o CPF também
+                cpf: formRaw.cpf.replace(/\D/g, '')  // Corrigindo a sintaxe
               }
             });
+            
           },
           error: (err) => {
             console.error('❌ Erro ao cadastrar cliente:', err);
@@ -150,7 +145,8 @@ export class CadastrarClienteComponent implements OnInit, AfterViewInit {
         'Authorization': `Bearer ${token}`
       });
 
-      this.http.get(`http://localhost:9090/api/pessoas?cpf=${cpfPesquisado}`, { headers })
+      this.http.get(environment.cadastroPessoasApi + `/pessoas/cpf/${cpfPesquisado}`, { headers })
+
         .subscribe(
           (response: any) => {
             if (response && response.nome && response.id) {
