@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BuscarCepService } from '../../../../services/buscar.cep.service';
-import { environment } from '../../../../../environments/environment'; // Importando as variáveis de ambiente
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-cadastrar-endereco',
@@ -38,16 +38,11 @@ export class CadastrarEnderecoComponent implements OnInit {
       tipoDeEndereco: [null, Validators.required]
     });
 
-    // Preencher valores via queryParams, se vierem da rota
     this.route.queryParams.subscribe(params => {
-      const nome = params['nome'];
-      const cpf = params['cpf'];
-      const pessoaId = params['pessoaId'];
-
       this.enderecoForm.patchValue({
-        nome,
-        cpf,
-        pessoaId
+        nome: params['nome'],
+        cpf: params['cpf'],
+        pessoaId: params['pessoaId']
       });
     });
   }
@@ -55,7 +50,6 @@ export class CadastrarEnderecoComponent implements OnInit {
   onSubmit() {
     if (this.enderecoForm.valid) {
       const rawForm = this.enderecoForm.getRawValue();
-
       const enderecoDTO = {
         cpf: rawForm.cpf.replace(/\D/g, ''),
         numero: rawForm.numero,
@@ -75,9 +69,8 @@ export class CadastrarEnderecoComponent implements OnInit {
         return;
       }
 
-      // Usando o endpoint da variável de ambiente para salvar o endereço
       this.http.post(
-        `${environment.cadastroEnderecoApi}/salvar-endereco`,  // Usando o endpoint da variável de ambiente
+        `${environment.salvarEnderecoApi}/salvar-endereco`,
         enderecoDTO,
         {
           headers: {
@@ -99,7 +92,13 @@ export class CadastrarEnderecoComponent implements OnInit {
       });
 
     } else {
-      console.warn('Formulário inválido!');
+      console.warn('Formulário inválido!', this.enderecoForm.value);
+      Object.keys(this.enderecoForm.controls).forEach(campo => {
+        const control = this.enderecoForm.get(campo);
+        if (control && control.invalid) {
+          console.warn(`Campo "${campo}" está inválido. Erros:`, control.errors);
+        }
+      });
       this.enderecoForm.markAllAsTouched();
     }
   }
@@ -122,8 +121,9 @@ export class CadastrarEnderecoComponent implements OnInit {
       return;
     }
 
-    // Usando o endpoint da variável de ambiente para buscar a pessoa
-    this.http.get<any>(`${environment.cadastroPessoasApi}/cpf/${cpf}`, {  // Usando a variável de ambiente
+    const cpfNumerico = cpf.replace(/\D/g, '');
+
+    this.http.get<any>(`${environment.cadastroPessoasApi}/pessoas/cpf/${cpfNumerico}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).subscribe(
       response => {
@@ -155,7 +155,6 @@ export class CadastrarEnderecoComponent implements OnInit {
         return;
       }
 
-      // Usando o serviço de buscar CEP
       this.buscarCepService.buscarCep(cepFormatado).subscribe((dados) => {
         if (dados && !dados.erro) {
           this.enderecoForm.patchValue({

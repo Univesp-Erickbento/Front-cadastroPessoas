@@ -1,18 +1,24 @@
+// environment.prod.ts
 export const environment = {
   production: true,
 
-  // APIs segmentadas por serviço
+  // Módulo de Autenticação
   AUTH_API: 'http://45.93.100.30:9090/auth',
 
-  // Pessoas - Cadastro (Spring Boot rodando na porta 9090)
+  // Módulo Cadastro de Pessoas
   cadastroPessoasApi: 'http://45.93.100.30:9090/api',
 
-  // Pessoas - Consulta + Cadastro Cliente e Funcionário (porta 9091)
+  // Módulo Consulta de Pessoas (clientes, funcionários)
   consultaPessoasApi: 'http://45.93.100.30:9091/api',
   cadastroClienteApi: 'http://45.93.100.30:9091/api',
   cadastroFuncionarioApi: 'http://45.93.100.30:9091/api',
 
-  // Endereço
+  // Módulo Cadastro de Endereço
   cadastroEnderecoApi: 'http://45.93.100.30:9092/api',
+
+  // Módulo Consulta de Endereços
   consultaEnderecoApi: 'http://45.93.100.30:9093/api',
+
+  // Endpoint completo de salvar endereço (separado como no dev)
+  salvarEnderecoApi: 'http://45.93.100.30:9093/api/enderecos',
 };

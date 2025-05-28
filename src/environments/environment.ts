@@ -19,6 +19,7 @@
 //   consultaEnderecoApi: 'http://192.168.1.200:9093/api',
 // };
 
+// environment.production.ts
 
 export const environment = {
   production: false,
@@ -39,4 +40,6 @@ export const environment = {
 
   // Módulo Consulta de Endereços
   consultaEnderecoApi: 'http://localhost:9093/api',
+  salvarEnderecoApi: 'http://localhost:9093/api/enderecos',
+
 };
