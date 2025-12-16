@@ -39,7 +39,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "defaultConfiguration": "development",  // Alterado para 'development'
+          "defaultConfiguration": "development",
           "options": {
             "baseHref": "/",
             "outputPath": "dist/angularproject",
@@ -54,8 +54,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -95,7 +94,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "defaultConfiguration": "development",  // Alterado para 'development'
+          "defaultConfiguration": "development",
           "options": {
             "proxyConfig": "./proxy.conf.json",
             "host": "0.0.0.0"

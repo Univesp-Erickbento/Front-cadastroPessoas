@@ -1,0 +1,72 @@
+@use '@angular/material' as mat;
+
+/* =========================
+   TEMA MATERIAL CUSTOMIZADO
+   ========================= */
+
+$primary: mat.define-palette(mat.$indigo-palette, 600);
+$accent: mat.define-palette(mat.$teal-palette, 500);
+$warn: mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'Roboto, Helvetica, Arial, sans-serif'
+  ),
+  density: 0
+));
+
+@include mat.core();
+@include mat.all-component-themes($theme);
+
+/* =========================
+   ESTILOS GLOBAIS
+   ========================= */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #f4f7fa;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Container padrão de página */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Card padrão */
+.page-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Títulos */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Formulários */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* Botões */
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
