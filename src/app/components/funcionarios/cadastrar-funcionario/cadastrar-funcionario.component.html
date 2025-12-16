@@ -11,7 +11,7 @@
         <input matInput formControlName="nome" readonly>
       </mat-form-field>
 
-      <!-- CPF e PessoaId -->
+      <!-- CPF, PessoaId e Botão de Pesquisa -->
       <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>CPF</mat-label>
@@ -34,13 +34,12 @@
           color="accent"
           type="button"
           (click)="pesquisarPessoa()"
-          matTooltip="Pesquisar Pessoa"
-        >
+          matTooltip="Pesquisar Pessoa">
           Pesquisar Pessoa
         </button>
       </div>
 
-      <!-- Cargo e Registro -->
+      <!-- Cargo e Registro do Funcionário -->
       <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>Cargo</mat-label>

@@ -1,130 +1,40 @@
-/* Corpo da página */
-body {
-  background-color: #1a73e8; /* Fundo azul */
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
+.linha-pessoa {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap; /* permite quebrar em telas pequenas */
 }
 
-/* Fundo do formulário */
-.form-container {
-  background-color: #1a1a1a; /* Fundo escuro */
-  width: 40%;
-  padding: 2rem;
-  margin: 2rem auto;
-  border-radius: 0.7rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.campo-nome, .campo-cpf, .campo-id {
+  flex: 1 1 48%; /* dois campos por linha */
 }
 
-/* Título do formulário */
-.title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  width: 50%;
-  margin: 1.5rem auto;
-  background-color: #1a1a1a;
-}
-
-/* Estilo dos campos de entrada */
 mat-form-field {
   width: 100%;
-  display: block;
+  min-height: 60px;
 }
 
-mat-form-field input {
-  color: white;
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* alinha os botões à direita */
+  gap: 16px;
 }
 
-/* Ícone de visibilidade da senha */
-mat-icon {
-  color: white;
-}
-
-/* Botão de ação */
-.submit-btn, .action-btn {
-  background-color: #1a73e8;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  width: 100%;
-  padding: 0.8rem;
-  border-radius: 0.4rem;
-  transition: 0.3s;
-}
-
-.submit-btn:hover, .action-btn:hover {
-  background-color: #145bb7;
-}
-
-/* Checkboxes */
-.checkbox-group {
-  text-align: left;
-  margin-top: 1rem;
-}
-
-mat-checkbox {
-  color: white;
-}
-
-/* Links adicionais */
-.forgot-password {
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.forgot-password a {
-  color: #1a73e8;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.forgot-password a:hover {
-  text-decoration: underline;
+button {
+  min-width: 120px;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .form-container {
-      width: 90%;
-      padding: 1.5rem;
+  .linha-pessoa {
+    flex-direction: column;
   }
 
-  .title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    width: 60%; /* igual ao cadastro de funcionário */
-    margin: 1.5rem auto; /* centralizado */
-    background-color: #1a1a1a;
-    white-space: nowrap; /* impede quebra de linha */
-  }
-  
-  
-  
-  .submit-btn, .action-btn {
-      font-size: 0.875rem;
-      padding: 0.6rem;
+  .campo-nome, .campo-cpf, .campo-id {
+    flex: 1 1 100%;
   }
 
   .button-container {
-      flex-direction: column;
-      gap: 10px;
+    justify-content: center;
   }
-}
-
-input[readonly] {
-  opacity: 0.7;
 }

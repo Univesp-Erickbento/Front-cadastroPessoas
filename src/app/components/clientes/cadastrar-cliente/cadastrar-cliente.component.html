@@ -1,67 +1,71 @@
-<div class="form-container">
-  <h2 class="title">Cadastro de Cliente</h2>
+<div class="page-container">
+  <mat-card class="page-card">
 
-  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <h2 class="page-title">Cadastro de Cliente</h2>
 
-    <!-- Nome (opcional e readonly) -->
-    <mat-form-field appearance="outline" class="campo-nome">
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome" readonly>
-    </mat-form-field>
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
 
-    <div class="linha-pessoa">
-      <!-- CPF (obrigatório) -->
-      <mat-form-field appearance="outline" class="campo-cpf">
-        <mat-label>CPF</mat-label>
-        <input
-          matInput
-          formControlName="cpf"
-          maxlength="14"
-          placeholder="000.000.000-00"
-          (input)="formatarCpf($event)">
+      <!-- Nome -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" readonly>
       </mat-form-field>
 
-      <!-- PessoaId (opcional e readonly) -->
-      <mat-form-field appearance="outline" class="campo-id">
-        <mat-label>PessoaId</mat-label>
-        <input matInput formControlName="pessoaId" readonly>
-      </mat-form-field>
+      <!-- CPF, PessoaId e Botão de Pesquisa -->
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input
+            matInput
+            formControlName="cpf"
+            maxlength="14"
+            placeholder="000.000.000-00"
+            (input)="formatarCpf($event)"
+          >
+        </mat-form-field>
 
-      <!-- Botão de Pesquisa -->
-      <button
-        mat-raised-button
-        color="accent"
-        type="button"
-        (click)="pesquisarPessoa()"
-        matTooltip="Pesquisar Pessoa"
-        class="btn-pesquisar">
-        Pesquisar Pessoa
-      </button>
-    </div>
+        <mat-form-field appearance="outline">
+          <mat-label>PessoaId</mat-label>
+          <input matInput formControlName="pessoaId" readonly>
+        </mat-form-field>
 
-    <!-- Código de Registro do Cliente (obrigatório) -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Registro do Cliente</mat-label>
-      <input matInput formControlName="clienteReg" required>
-    </mat-form-field>
-    
-    <!-- Status do Cliente (obrigatório) -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Status do Cliente</mat-label>
-      <mat-select formControlName="clienteStatus">
-        <mat-option value="ativo">Ativo</mat-option>
-        <mat-option value="inativo">Inativo</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          (click)="pesquisarPessoa()"
+          matTooltip="Pesquisar Pessoa">
+          Pesquisar Pessoa
+        </button>
+      </div>
 
-    <!-- Botões -->
-    <div class="button-container">
-      <button mat-raised-button color="warn" type="button" (click)="voltar()" class="action-btn">
-        Voltar
-      </button>
-      <button mat-raised-button color="primary" type="submit" class="action-btn">
-        Próximo
-      </button>
-    </div>
-  </form>
+      <!-- Registro e Status do Cliente -->
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Registro do Cliente</mat-label>
+          <input matInput formControlName="clienteReg" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status do Cliente</mat-label>
+          <mat-select formControlName="clienteStatus">
+            <mat-option value="ativo">Ativo</mat-option>
+            <mat-option value="inativo">Inativo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Botões -->
+      <div class="action-buttons">
+        <button mat-raised-button color="warn" type="button" (click)="voltar()">
+          Voltar
+        </button>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="clienteForm.invalid">
+          Próximo
+        </button>
+      </div>
+
+    </form>
+  </mat-card>
 </div>

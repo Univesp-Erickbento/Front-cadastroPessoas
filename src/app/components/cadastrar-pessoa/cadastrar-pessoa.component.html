@@ -2,73 +2,89 @@
   <h2 class="title">Cadastro de Pessoa</h2>
   <form [formGroup]="pessoaForm">
 
-    <!-- Nome -->
-    <mat-form-field appearance="outline">
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome" placeholder="Digite seu nome" />
-      <mat-error *ngIf="pessoaForm.get('nome')?.invalid && pessoaForm.get('nome')?.touched">
-        Nome inválido
-      </mat-error>
-    </mat-form-field>
+    <!-- Linha 1: Nome e Sobrenome -->
+    <div class="linha-pessoa">
+      <mat-form-field class="campo-nome" appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" placeholder="Digite seu nome" />
+        <mat-error *ngIf="pessoaForm.get('nome')?.invalid && pessoaForm.get('nome')?.touched">
+          Nome inválido
+        </mat-error>
+      </mat-form-field>
 
-    <!-- Sobrenome -->
-    <mat-form-field appearance="outline">
-      <mat-label>Sobrenome</mat-label>
-      <input matInput formControlName="sobrenome" placeholder="Digite seu sobrenome" />
-      <mat-error *ngIf="pessoaForm.get('sobrenome')?.invalid && pessoaForm.get('sobrenome')?.touched">
-        Sobrenome inválido
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field class="campo-nome" appearance="outline">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput formControlName="sobrenome" placeholder="Digite seu sobrenome" />
+        <mat-error *ngIf="pessoaForm.get('sobrenome')?.invalid && pessoaForm.get('sobrenome')?.touched">
+          Sobrenome inválido
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <!-- CPF -->
-    <mat-form-field appearance="outline">
-      <mat-label>CPF</mat-label>
-      <input matInput formControlName="cpf" placeholder="000.000.000-00" maxlength="14" (input)="formatarCpf($event)" />
-      <mat-error *ngIf="pessoaForm.get('cpf')?.invalid && pessoaForm.get('cpf')?.touched">
-        CPF inválido
-      </mat-error>
-    </mat-form-field>
+    <!-- Linha 2: CPF e RG -->
+    <div class="linha-pessoa">
+      <mat-form-field class="campo-cpf" appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input
+          matInput
+          formControlName="cpf"
+          placeholder="000.000.000-00"
+          maxlength="14"
+          (input)="formatarCpf($event)"
+        />
+        <mat-error *ngIf="pessoaForm.get('cpf')?.invalid && pessoaForm.get('cpf')?.touched">
+          CPF inválido
+        </mat-error>
+      </mat-form-field>
 
-    <!-- RG -->
-    <mat-form-field appearance="outline">
-      <mat-label>RG</mat-label>
-      <input matInput formControlName="rg" placeholder="00.000.000-0" maxlength="12" (input)="formatarRg($event)" />
-      <mat-error *ngIf="pessoaForm.get('rg')?.invalid && pessoaForm.get('rg')?.touched">
-        RG inválido
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field class="campo-id" appearance="outline">
+        <mat-label>RG</mat-label>
+        <input
+          matInput
+          formControlName="rg"
+          placeholder="00.000.000-0"
+          maxlength="12"
+          (input)="formatarRg($event)"
+        />
+        <mat-error *ngIf="pessoaForm.get('rg')?.invalid && pessoaForm.get('rg')?.touched">
+          RG inválido
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <!-- Gênero -->
-    <mat-form-field appearance="outline">
-      <mat-label>Gênero</mat-label>
-      <mat-select formControlName="genero">
-        <mat-option value="masculino">Masculino</mat-option>
-        <mat-option value="feminino">Feminino</mat-option>
-        <mat-option value="outro">Outro</mat-option>
-      </mat-select>
-      <mat-error *ngIf="pessoaForm.get('genero')?.invalid && pessoaForm.get('genero')?.touched">
-        Escolha um gênero
-      </mat-error>
-    </mat-form-field>
+    <!-- Linha 3: Gênero e Data de Nascimento -->
+    <div class="linha-pessoa">
+      <mat-form-field class="campo-nome" appearance="outline">
+        <mat-label>Gênero</mat-label>
+        <mat-select formControlName="genero">
+          <mat-option value="masculino">Masculino</mat-option>
+          <mat-option value="feminino">Feminino</mat-option>
+          <mat-option value="outro">Outro</mat-option>
+        </mat-select>
+        <mat-error *ngIf="pessoaForm.get('genero')?.invalid && pessoaForm.get('genero')?.touched">
+          Escolha um gênero
+        </mat-error>
+      </mat-form-field>
 
-    <!-- Data de Nascimento -->
-    <mat-form-field appearance="outline">
-      <mat-label>Data de Nascimento</mat-label>
-      <input matInput formControlName="dataNascimento" type="date" />
-      <mat-error *ngIf="pessoaForm.get('dataNascimento')?.invalid && pessoaForm.get('dataNascimento')?.touched">
-        Data inválida
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field class="campo-nome" appearance="outline">
+        <mat-label>Data de Nascimento</mat-label>
+        <input matInput formControlName="dataNascimento" type="date" />
+        <mat-error *ngIf="pessoaForm.get('dataNascimento')?.invalid && pessoaForm.get('dataNascimento')?.touched">
+          Data inválida
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <!-- Botão -->
-    <button
-      mat-flat-button
-      color="primary"
-      class="submit-btn"
-      [disabled]="pessoaForm.invalid"
-      (click)="proximo()"
-    >
-      Próximo
-    </button>
+    <!-- Botões -->
+    <div class="button-container">
+      <button mat-raised-button color="warn" type="button" (click)="voltar()">
+        Voltar
+      </button>
+
+      <button mat-raised-button color="primary" type="button" [disabled]="pessoaForm.invalid" (click)="proximo()">
+        Próximo
+      </button>
+    </div>
+
   </form>
 </div>
