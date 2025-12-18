@@ -1,6 +1,6 @@
 /* Container principal do formulário */
 .form-container {
-  background-color: #1a1a1a;
+  background-color: #1a1a1a; /* Fundo escuro */
   max-width: 600px;
   width: 90%;
   padding: 2rem;
@@ -36,17 +36,17 @@
 
 /* Ajuste de largura para o campo "ID Pessoa" */
 .campo-id {
-  width: 20%; /* ID Pessoa ocupa 30% da largura */
+  width: 20%; /* ID Pessoa ocupa 20% da largura */
 }
 
 /* Ajuste de largura para o campo "CPF" */
 .campo-cpf {
-  width: 55%; /* CPF ocupa 40% da largura */
+  width: 55%; /* CPF ocupa 55% da largura */
 }
 
 /* Ajuste de largura para o campo "Nome" */
 .campo-nome {
-  width: 100%; /* Nome ocupa 45% da largura */
+  width: 100%; /* Nome ocupa 100% da largura */
 }
 
 /* Estilo dos campos de entrada */

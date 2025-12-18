@@ -1,16 +1,19 @@
-<div class="form-container">
-    <h2 class="title">Visualizar Funcionário</h2>
+<div class="page-container">
+  <mat-card class="page-card">
+
+    <h2 class="page-title">Visualizar Funcionário</h2>
+
     <form [formGroup]="funcionarioForm">
-  
+
       <!-- Nome -->
-      <mat-form-field appearance="outline" class="campo-nome">
+      <mat-form-field appearance="outline">
         <mat-label>Nome</mat-label>
-        <input matInput formControlName="nome" [disabled]="true">
+        <input matInput formControlName="nome" readonly>
       </mat-form-field>
-  
-      <!-- CPF e PessoaId -->
-      <div class="linha-pessoa">
-        <mat-form-field appearance="outline" class="campo-cpf">
+
+      <!-- CPF, PessoaId e Botão de Pesquisa -->
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
           <mat-label>CPF</mat-label>
           <input
             matInput
@@ -18,55 +21,59 @@
             maxlength="14"
             placeholder="000.000.000-00"
             (input)="formatarCpf($event)"
+            readonly
           >
         </mat-form-field>
-  
-        <mat-form-field appearance="outline" class="campo-id">
+
+        <mat-form-field appearance="outline">
           <mat-label>PessoaId</mat-label>
-          <input matInput formControlName="pessoaId" [disabled]="true">
+          <input matInput formControlName="pessoaId" readonly>
         </mat-form-field>
-  
+
         <button
           mat-raised-button
           color="accent"
           type="button"
           (click)="pesquisarPessoa()"
-          matTooltip="Pesquisar Pessoa"
-          class="btn-pesquisar">
+          matTooltip="Pesquisar Pessoa">
           Pesquisar Pessoa
         </button>
       </div>
-  
-      <!-- Cargo -->
-      <mat-form-field appearance="outline">
-        <mat-label>Cargo</mat-label>
-        <input matInput formControlName="funcionarioTipo" [disabled]="true">
-      </mat-form-field>
-  
-      <!-- Registro -->
-      <mat-form-field appearance="outline">
-        <mat-label>Registro do Funcionário</mat-label>
-        <input matInput formControlName="funcionarioReg" [disabled]="true">
-      </mat-form-field>
-  
-        <!-- Status -->
+
+      <!-- Cargo e Registro do Funcionário -->
+      <div class="form-grid">
         <mat-form-field appearance="outline">
-            <mat-label>Status do Funcionário</mat-label>
-            <input matInput formControlName="funcionarioStatus" [disabled]="true">
+          <mat-label>Cargo</mat-label>
+          <input matInput formControlName="funcionarioTipo" readonly>
         </mat-form-field>
-  
-      <!-- Data de Admissão -->
-      <mat-form-field appearance="outline">
-        <mat-label>Data de Admissão</mat-label>
-        <input matInput formControlName="dataDeAdmissao" type="date" [disabled]="true">
-      </mat-form-field>
-  
-      <!-- Botão Voltar -->
-      <div class="button-container">
-        <button mat-raised-button color="warn" type="button" (click)="voltar()" class="action-btn">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Registro do Funcionário</mat-label>
+          <input matInput formControlName="funcionarioReg" readonly>
+        </mat-form-field>
+      </div>
+
+      <!-- Status e Data de Admissão -->
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Status do Funcionário</mat-label>
+          <input matInput formControlName="funcionarioStatus" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Data de Admissão</mat-label>
+          <input matInput formControlName="dataDeAdmissao" type="date" readonly>
+        </mat-form-field>
+      </div>
+
+      <!-- Botões (apenas Voltar) -->
+      <div class="action-buttons">
+        <button mat-raised-button color="warn" type="button" (click)="voltar()">
           Voltar
         </button>
       </div>
+
     </form>
-  </div>
+  </mat-card>
+</div>
   

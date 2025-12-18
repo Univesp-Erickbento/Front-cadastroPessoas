@@ -1,6 +1,8 @@
-<div class="form-container">
-    <h2 class="title">Visualizar Endereços</h2>
-  
+<div class="page-container">
+  <mat-card class="page-card">
+
+    <h2 class="page-title">Visualizar Endereços</h2>
+
     <form [formGroup]="enderecoForm">
       <!-- Nome -->
       <mat-form-field appearance="outline">
@@ -9,7 +11,7 @@
       </mat-form-field>
   
       <!-- CPF, PessoaId e Botão -->
-      <div class="linha-pessoa">
+      <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>CPF</mat-label>
           <input
@@ -63,7 +65,7 @@
         <input matInput formControlName="logradouro" readonly />
       </mat-form-field>
   
-      <div class="form-group-row">
+      <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>Complemento</mat-label>
           <input matInput formControlName="complemento" readonly />
@@ -75,7 +77,7 @@
         </mat-form-field>
       </div>
   
-      <div class="form-group-row">
+      <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>Bairro</mat-label>
           <input matInput formControlName="bairro" readonly />
@@ -87,7 +89,7 @@
         </mat-form-field>
       </div>
   
-      <div class="form-group-row">
+      <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>Estado</mat-label>
           <input matInput formControlName="estado" readonly />
@@ -100,17 +102,13 @@
       </div>
   
       <!-- Botão Voltar -->
-      <div class="button-container">
-        <button
-          mat-raised-button
-          color="warn"
-          type="button"
-          (click)="navegarParaLista()"
-          class="action-btn"
-        >
+      <div class="action-buttons">
+        <button mat-raised-button color="warn" type="button" (click)="navegarParaLista()">
           Voltar
         </button>
       </div>
+
     </form>
-  </div>
+  </mat-card>
+</div>
   

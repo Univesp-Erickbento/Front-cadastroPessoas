@@ -70,3 +70,133 @@ html, body {
   gap: 12px;
   margin-top: 24px;
 }
+
+/* =========================
+   LAYOUT GERAL E CABEÇALHO
+   ========================= */
+
+:root {
+  --bg: #f4f7fa;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --primary: #3f51b5;
+  --primary-contrast: #ffffff;
+  --accent: #009688;
+  --radius: 10px;
+}
+
+body {
+  background: var(--bg);
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+  box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+  padding: 8px 16px;
+  backdrop-filter: blur(6px);
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.app-menu {
+  padding: 24px 12px;
+}
+
+.app-main {
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
+@media (max-width: 900px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
+  .app-menu {
+    order: 2;
+    padding: 12px 0;
+  }
+}
+
+/* =========================
+   COMPONENTES DE UI (BOTÕES, INPUTS, CARDS)
+   ========================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid rgba(63,81,181,0.12);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(15,23,42,0.08);
+  background: #fff;
+  box-shadow: none;
+  outline: none;
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(63,81,181,0.9);
+  box-shadow: 0 4px 12px rgba(63,81,181,0.06);
+}
+
+.page-card {
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Listas de cartões */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* Pequenas helpers */
+.inline-row { display:flex; gap:12px; align-items:center; }
+.spaced { margin-top: 16px; }
+
+/* Tema escuro simples */
+.dark-theme {
+  --bg: #0b1220;
+  --surface: #081026;
+  color: #e6eef8;
+}
+
