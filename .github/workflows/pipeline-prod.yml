@@ -36,33 +36,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: 🧹 Limpar versões antigas no Docker Hub
-        run: |
-          # Obter as tags do Docker Hub
-          TAGS=$(curl -s "https://hub.docker.com/v2/repositories/torresbento/tbmt-web-angular/tags/" | jq -r '.results[].name')
-
-          # Obter a versão atual que está sendo usada
-          CURRENT_VERSION=${{ steps.project_version.outputs.version }}
-
-          # Identificar as versões mais antigas
-          REMOVE_TAGS=()
-          for TAG in $TAGS; do
-            # Verificar se a tag é mais antiga que a versão atual
-            if [[ "$TAG" < "$CURRENT_VERSION" ]]; then
-              REMOVE_TAGS+=($TAG)
-            fi
-          done
-
-          # Manter as duas versões mais antigas
-          REMOVE_TAGS=($(echo "${REMOVE_TAGS[@]}" | tr ' ' '\n' | sort | head -n 2))
-
-          # Excluir as versões antigas encontradas
-          for TAG in "${REMOVE_TAGS[@]}"; do
-            echo "Removendo versão $TAG do Docker Hub..."
-            docker rmi torresbento/tbmt-web-angular:$TAG || true
-            docker push torresbento/tbmt-web-angular:$TAG || true
-          done
-
       - name: 🏗️ Build da imagem Docker do frontend
         run: docker build -t torresbento/tbmt-web-angular:${{ steps.project_version.outputs.version }} .
 
@@ -78,10 +51,10 @@ jobs:
         if: success()
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.REMOTE_PORT }}
+          host: ${{ secrets.REMOTE_HOST }}      # IP público da EC2
+          username: ${{ secrets.REMOTE_USER }}  # "ubuntu"
+          key: ${{ secrets.SSH_KEY }}           # chave privada .pem
+          port: 22                               # padrão SSH
           script: |
             echo "⛔ Parando container antigo..."
             sudo docker stop web-angular || true
@@ -96,13 +69,13 @@ jobs:
             sudo docker pull torresbento/tbmt-web-angular:${{ steps.project_version.outputs.version }}
 
             echo "🌐 Garantindo rede personalizada (se necessário)..."
-            if ! sudo docker network inspect tbmt-rede-docker > /dev/null 2>&1; then
-              sudo docker network create --driver bridge --subnet 172.18.0.0/16 tbmt-rede-docker
+            if ! sudo docker network inspect bmt-rede-docker > /dev/null 2>&1; then
+              sudo docker network create --driver bridge --subnet 172.18.0.0/16 bmt-rede-docker
             fi
 
             echo "🚀 Subindo novo container..."
             sudo docker run -d --name web-angular \
               --label project=web-angular \
-              --network tbmt-rede-docker \
+              --network bmt-rede-docker \
               -p 4200:80 \
               torresbento/tbmt-web-angular:${{ steps.project_version.outputs.version }}
