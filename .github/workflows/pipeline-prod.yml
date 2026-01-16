@@ -53,7 +53,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}      # IP público da EC2
           username: ${{ secrets.REMOTE_USER }}  # "ubuntu"
-          key: ${{ secrets.SSH_KEY }}           # chave privada .pem
+          key: ${{ secrets.SSH_PASSWORD }}           # chave privada .pem
           port: 22                               # padrão SSH
           script: |
             echo "⛔ Parando container antigo..."
