@@ -3,7 +3,7 @@ export const environment = {
   production: true,
 
   // Módulo de Autenticação
-  AUTH_API: 'http://45.93.100.30:9090/auth',
+  AUTH_API: 'http://18.215.173.41:9001/auth',
 
   // Módulo Cadastro de Pessoas
   cadastroPessoasApi: 'http://45.93.100.30:9090/api',
