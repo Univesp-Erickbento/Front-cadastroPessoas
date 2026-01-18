@@ -1,25 +1,36 @@
 <main>
-    <section class="form-section">
-        <!-- <img src="/assets/svg/image3.png"/> -->
-       <h2>{{ title }}</h2>
-       <ng-content></ng-content>
-       <div class="btn-wrapper">
-            <button 
-                class="btn-primary" 
-                (click)="submit()"
-                [disabled]="disablePrimaryBtn"
-            >
-                {{ primaryBtnText }}
-            </button>
-            <div class="divider">
-                <div></div>
-                <span>ou</span>
-                <div></div>
-            </div>
-            <button class="btn-secondary" (click)="navigate()">{{ secondaryBtnText }}</button>
-       </div>
-    </section>
-    <section class="main-section">
-        <!-- <img src="/assets/svg/image2.png"/> -->
-    </section>
+  <section class="form-section">
+    <!-- Título da tela -->
+    <h2>{{ title }}</h2>
+
+    <!-- Conteúdo do formulário inserido pelo componente pai -->
+    <ng-content></ng-content>
+
+    <div class="btn-wrapper">
+      <!-- Botão principal -->
+      <button
+        class="btn-primary"
+        (click)="onSubmit()"
+        [disabled]="disablePrimaryBtn"
+      >
+        {{ primaryBtnText }}
+      </button>
+
+      <!-- Divider "ou" -->
+      <div class="divider">
+        <div></div>
+        <span>ou</span>
+        <div></div>
+      </div>
+
+      <!-- Botão secundário -->
+      <button class="btn-secondary" (click)="onNavigate()">
+        {{ secondaryBtnText }}
+      </button>
+    </div>
+  </section>
+
+  <section class="main-section">
+    <!-- Conteúdo visual extra (imagem ou gráfico) -->
+  </section>
 </main>

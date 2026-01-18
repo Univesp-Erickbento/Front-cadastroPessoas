@@ -25,7 +25,7 @@ export const environment = {
   production: false,
 
   // Módulo de Autenticação
-  AUTH_API: 'http://localhost:9090/auth',
+  AUTH_API: 'http://localhost:9001/auth',
 
   // Módulo Cadastro de Pessoas
   cadastroPessoasApi: 'http://localhost:9090/api',

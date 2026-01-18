@@ -19,7 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatNativeDateModule, MatOptionModule } from '@angular/material/core'; // Necessário para Datepicker
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 
 // Rotas
 import { AppRoutingModule } from './app-routing.module';
@@ -37,21 +37,24 @@ import { CadastrarPessoaComponent } from './components/cadastrar-pessoa/cadastra
 import { CadastrarClienteComponent } from './components/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { CadastrarFuncionarioComponent } from './components/funcionarios/cadastrar-funcionario/cadastrar-funcionario.component';
 import { CadastrarEnderecoComponent } from './components/endereco/cadastrar-enderecos/cadastrar-endereco/cadastrar-endereco.component';
-
-// Serviços
-import { PessoaService } from './components/cadastrar-pessoa/PessoaService';
-import { BuscarCepService } from './services/buscar.cep.service';
-import { AuthService } from './services/auth.service';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { DefaultLoginLayoutComponent } from './components/login/share/default-login-layout/default-login-layout/default-login-layout.component';
-import { PrimaryInputComponent } from './components/login/share/primary-input/primary-input/primary-input.component';
-import { UserComponent } from './components/login/pages/user/user.component';
 import { VisualizarClienteComponent } from './components/clientes/visualizar-cliente/visualizar-cliente.component';
 import { VisualizarFuncionarioComponent } from './components/funcionarios/visualizar-funcionario/visualizar-funcionario.component';
 import { VisualizarEnderecoComponent } from './components/endereco/visualizar-endereco/visualizar-endereco.component';
 import { DecoracaoDetalhesComponent } from './components/decoracao/itens/decoracao-detalhes/decoracao-detalhes.component';
 import { ListaProdutosComponent } from './decoracao/itens/lista-produtos/lista-produtos.component';
 
+// Login shared (NÃO standalone)
+import { DefaultLoginLayoutComponent } from './components/login/share/default-login-layout/default-login-layout/default-login-layout.component';
+import { PrimaryInputComponent } from './components/login/share/primary-input/primary-input/primary-input.component';
+
+// Login standalone
+import { UserComponent } from './components/login/pages/user/user.component';
+
+// Serviços
+import { PessoaService } from './components/cadastrar-pessoa/PessoaService';
+import { BuscarCepService } from './services/buscar.cep.service';
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -72,16 +75,17 @@ import { ListaProdutosComponent } from './decoracao/itens/lista-produtos/lista-p
     VisualizarEnderecoComponent,
     DecoracaoDetalhesComponent,
     ListaProdutosComponent,
-   
-    
-    
+
+    // ✅ SOMENTE COMPONENTES NÃO-STANDALONE
+    DefaultLoginLayoutComponent,
+    PrimaryInputComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule, // Adicionado para usar ngModel se necessário
+    FormsModule,
     HttpClientModule,
 
     // Angular Material
@@ -98,12 +102,12 @@ import { ListaProdutosComponent } from './decoracao/itens/lista-produtos/lista-p
     MatSlideToggleModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule, // Compatível com o MatDatepicker
+    MatNativeDateModule,
     MatCheckboxModule,
-    DefaultLoginLayoutComponent,
-    PrimaryInputComponent,
-    UserComponent,
-    MatOptionModule
+    MatOptionModule,
+
+    // ✅ COMPONENTE STANDALONE
+    UserComponent
   ],
   providers: [
     PessoaService,
@@ -117,4 +121,4 @@ import { ListaProdutosComponent } from './decoracao/itens/lista-produtos/lista-p
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
