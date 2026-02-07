@@ -9,11 +9,15 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private loginUrl = `${environment.AUTH_API}/login`;
   private registerUrl = `${environment.AUTH_API}/register`;
+  private tokenKey = 'authToken';
+  private redirectUrlKey = 'redirectUrl';
 
   constructor(private http: HttpClient) {}
 
+  // 🔹 Login do usuário
   login(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
-    localStorage.removeItem('authToken');
+    // Limpa token antigo
+    localStorage.removeItem(this.tokenKey);
 
     const loginRequest = {
       nomeUsuario: credentials.nomeUsuario,
@@ -25,6 +29,7 @@ export class AuthService {
     });
   }
 
+  // 🔹 Registro de novo usuário
   register(credentials: { nomeUsuario: string, senha: string }): Observable<any> {
     const registerRequest = {
       nomeUsuario: credentials.nomeUsuario,
@@ -36,23 +41,28 @@ export class AuthService {
     });
   }
 
+  // 🔹 Salva token JWT no localStorage
   salvarToken(token: string): void {
-    localStorage.setItem('authToken', token);
+    localStorage.setItem(this.tokenKey, token);
   }
 
+  // 🔹 Retorna o token JWT armazenado
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem(this.tokenKey);
   }
 
+  // 🔹 Limpa token JWT
   logout(): void {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem(this.tokenKey);
   }
 
+  // 🔹 Armazena URL para redirecionamento pós-login
   setRedirectUrl(url: string): void {
-    localStorage.setItem('redirectUrl', url);
+    localStorage.setItem(this.redirectUrlKey, url);
   }
 
+  // 🔹 Recupera URL para redirecionamento pós-login
   getRedirectUrl(): string | null {
-    return localStorage.getItem('redirectUrl');
+    return localStorage.getItem(this.redirectUrlKey);
   }
 }
