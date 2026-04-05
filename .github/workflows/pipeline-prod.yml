@@ -61,7 +61,6 @@ jobs:
 
             echo "🗑️ Removendo container antigo..."
             sudo docker rm web-angular || true
-            
 
             echo "🧹 Removendo imagem antiga..."
             sudo docker image prune -a -f --filter "label=project=web-angular" || true
